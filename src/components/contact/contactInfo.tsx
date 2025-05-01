@@ -2,9 +2,9 @@ import {  MailOpen, MapPinned, Phone } from "lucide-react";
 
 const ContactInfo = () => {
   const cardStyles =
-    "bg-white dark:bg-gray-800 rounded-xl shadow p-6 text-center space-y-4 transition-colors duration-300";
+    "bg-white dark:bg-gray-800 rounded-xl shadow p-6 text-center space-y-4 transition-colors duration-300 shadow-md shadow-[#FF3C48] transition transform hover:-translate-y-1 ";
 
-  const textStyle = "text-gray-600 dark:text-gray-300";
+  const textStyle = "text-gray-600 dark:text-gray-300  ";
 
   return (
     <div className="  py-12 px-4 transition-colors duration-300">
