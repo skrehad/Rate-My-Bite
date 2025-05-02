@@ -24,9 +24,10 @@ import { EyeIcon, EyeOff, Lock, Mail } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { loginUser } from '@/services/auth';
+import { getCurrentUser, loginUser } from '@/services/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { loginSchema } from './schema';
+import { IUser } from '@/types';
 const LoginForm = () => {
     interface LoginFormValues {
         email: string;
@@ -39,7 +40,7 @@ const LoginForm = () => {
     const router = useRouter()
     const searchParams = useSearchParams();
     const redirect = searchParams.get('redirect') || '/';
-    const { setIsLoading } = useAuth()!
+    const { setUser } = useAuth()!
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -47,8 +48,10 @@ const LoginForm = () => {
             const result = await loginUser(data);
             console.log({ result });
             if (result?.success) {
+                const user = await getCurrentUser() as IUser;
+                setUser(user);
+
                 toast.success(result?.message || "Login successful")
-                setIsLoading(true)
                 router.push(redirect)
             } else {
                 toast.error(result?.message || "Login failed")
