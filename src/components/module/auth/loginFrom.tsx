@@ -43,24 +43,8 @@ const LoginForm = () => {
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
-        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
-        const isPhone = /^\+?[0-9]{7,15}$/.test(data.email);
-        const modifiedData: { email?: string; phone?: string; password: string } = { password: "" }
-        if (isEmail) {
-            modifiedData["email"] = data.email
-        }
-        else if (isPhone) {
-            modifiedData["phone"] = data.email
-        }
-        else {
-            toast.error("Invalid email or phone")
-            return;
-        }
-        modifiedData["password"] = data.password
-        console.log({ modifiedData });
         try {
-            const result = await loginUser(modifiedData);
+            const result = await loginUser(data);
             console.log({ result });
             if (result?.success) {
                 toast.success(result?.message || "Login successful")
@@ -74,41 +58,6 @@ const LoginForm = () => {
         }
     }
     return (
-        // <div>
-
-        //     <Form {...form} >
-        //         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 max-w-md mx-auto">
-        //             <FormField
-        //                 control={form.control}
-        //                 name="email"
-        //                 render={({ field }) => (
-        //                     <FormItem>
-        //                         <FormLabel>Email or Phone</FormLabel>
-        //                         <FormControl>
-        //                             <Input placeholder="Enter email or phone" {...field} />
-        //                         </FormControl>
-        //                         <FormMessage />
-        //                     </FormItem>
-        //                 )}
-        //             />
-        //             <FormField
-        //                 control={form.control}
-        //                 name="password"
-        //                 render={({ field }) => (
-        //                     <FormItem>
-        //                         <FormLabel>Password</FormLabel>
-        //                         <FormControl>
-        //                             <Input type='password' placeholder="Enter password" {...field} />
-        //                         </FormControl>
-        //                         <FormMessage />
-        //                     </FormItem>
-        //                 )}
-        //             />
-        //             <Button type="submit">Submit</Button>
-        //         </form>
-        //     </Form>
-
-        // </div>
         <div className="flex items-center justify-center">
             <Card className="w-full max-w-md shadow-lg">
                 <CardHeader className="space-y-1">
@@ -129,7 +78,7 @@ const LoginForm = () => {
                                             <FormControl>
                                                 <Input placeholder="Enter email or phone" className="pl-9 " {...field} />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage className=' text-red-600' />
                                         </div>
                                     </FormItem>
                                 )}
@@ -142,9 +91,11 @@ const LoginForm = () => {
                                     <FormItem>
                                         <div className="flex items-center justify-between">
                                             <FormLabel>Password</FormLabel>
-                                            <Button variant="link" className="p-0 h-auto text-xs font-normal" type="button">
-                                                Forgot password?
-                                            </Button>
+                                            <Link href={'/forget-password'}>
+                                                <Button variant="link" className="p-0 h-auto text-xs font-normal" type="button">
+                                                    Forgot password?
+                                                </Button>
+                                            </Link>
                                         </div>
                                         <div className="relative">
                                             <Lock className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />

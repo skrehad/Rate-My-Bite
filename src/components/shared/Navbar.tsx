@@ -24,15 +24,15 @@ const Navbar = () => {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Menu", href: "/menu" },
+    { label: "Posts", href: "/posts" },
     { label: "Blog", href: "/blogs" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
 
   return (
-    <nav className="bg-white  dark:bg-gray-900 shadow-md sticky top-0 z-50">
-      <div className="container  px-4 py-4 flex justify-between items-center">
+    <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
+      <div className="w-full px-5 md:px-12 lg:px-16 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
@@ -53,11 +53,10 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-lg font-semibold transition-colors ${
-                pathname === item.href
-                  ? "text-[#FF3C48]"
-                  : "text-gray-800 dark:text-white hover:text-orange-400"
-              }`}
+              className={`text-base font-semibold transition-colors ${pathname === item.href
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
+                }`}
             >
               {item.label}
             </Link>
@@ -140,11 +139,10 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`block font-semibold text-md ${
-                pathname === item.href
-                  ? "text-orange-500"
-                  : "text-gray-800 dark:text-white hover:text-orange-400"
-              }`}
+              className={`block font-semibold text-md ${pathname === item.href
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
+                }`}
             >
               {item.label}
             </Link>
