@@ -1,66 +1,51 @@
-"use client"
-import * as React from "react"
+"use client";
 
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
-import "./Styles.css"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { FaCartArrowDown } from "react-icons/fa";
+
 export default function Banner() {
-    const [sliderRef] = useKeenSlider<HTMLDivElement>(
-        {
-            loop: true,
-        },
-        [
-            (slider) => {
-                let timeout: ReturnType<typeof setTimeout>
-                let mouseOver = false
-                function clearNextTimeout() {
-                    clearTimeout(timeout)
-                }
-                function nextTimeout() {
-                    clearTimeout(timeout)
-                    if (mouseOver) return
-                    timeout = setTimeout(() => {
-                        slider.next()
-                    }, 2000)
-                }
-                slider.on("created", () => {
-                    slider.container.addEventListener("mouseover", () => {
-                        mouseOver = true
-                        clearNextTimeout()
-                    })
-                    slider.container.addEventListener("mouseout", () => {
-                        mouseOver = false
-                        nextTimeout()
-                    })
-                    nextTimeout()
-                })
-                slider.on("dragStarted", clearNextTimeout)
-                slider.on("animationEnded", nextTimeout)
-                slider.on("updated", nextTimeout)
-            },
-        ]
-    )
+  const [animate, setAnimate] = useState(false);
 
-    return (
-        <>
-            <div ref={sliderRef} className="keen-slider lg:h-[500px] h-[400px]">
-                <div className="keen-slider__slide relative number-slide1">
-                    <div className="h-full absolute w-full z-0 bg-black/80 opacity-35">
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimate(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
-                    </div>
-                    <div className="relative z-20">
-                        <h2 className="text-4xl font-semibold">Delicious Meals, Delivered Fresh!</h2>
-                        <Link href={'/login'}><Button>More</Button></Link>
-                    </div>
-                </div>
-                <div className="keen-slider__slide number-slide2">2</div>
-                <div className="keen-slider__slide number-slide3">3</div>
-                <div className="keen-slider__slide number-slide4">4</div>
-                <div className="keen-slider__slide number-slide5">5</div>
-                <div className="keen-slider__slide number-slide6">6</div>
-            </div>
-        </>
-    )
+  return (
+    <section className="w-full bg-secondary py-12 px-6 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div
+        className={`space-y-6 transition-all duration-700 ease-out ${
+          animate ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
+        }`}
+      >
+        <h1 className="text-4xl md:text-5xl font-bold text-[#FF3C48] leading-tight">
+          Delicious Food, Delivered To You
+        </h1>
+        <p className="text-lg text-black dark:text-white max-w-md">
+          Experience mouth-watering meals made with love and delivered fresh to
+          your doorstep. Order now and enjoy exclusive deals!
+        </p>
+        <Button className="bg-[#FF3C48]  hover:bg-[#ff3c49ec]  text-white px-6 py-3 rounded-2xl shadow-md text-lg cursor-pointer">
+          Order Now <FaCartArrowDown />
+        </Button>
+      </div>
+
+      <div
+        className={`transition-all duration-700 ease-out flex justify-center ${
+          animate ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
+        }`}
+      >
+        <Image
+          src="/image/home/banner.jpg"
+          alt="Delicious Food"
+          width={500}
+          height={400}
+          className="rounded-2xl shadow-xl"
+          priority
+        />
+      </div>
+    </section>
+  );
 }
