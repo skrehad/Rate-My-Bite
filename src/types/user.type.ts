@@ -4,6 +4,7 @@ export interface IUser {
   phone: string;
   password: string;
   name: string;
+  photo?: string;
   role: "customer" | "provider";
   isActive: boolean;
   address?: string;
