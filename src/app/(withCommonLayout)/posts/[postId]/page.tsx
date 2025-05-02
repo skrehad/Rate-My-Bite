@@ -103,7 +103,7 @@ async function getPostData(id: string) {
 }
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
-  const post = await getPostData(params.postId)
+  const post = await getPostData(params?.postId)
 
   if (!post) {
     notFound()

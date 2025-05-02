@@ -20,6 +20,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { CircleUserRoundIcon } from "lucide-react";
+import Image from "next/image";
 
 
 const Navbar = () => {
@@ -32,10 +33,12 @@ const Navbar = () => {
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
                         <a href="#">
-                            <img
+                            <Image
                                 className="w-auto h-6 sm:h-7"
                                 src="https://merakiui.com/images/full-logo.svg"
                                 alt="Logo"
+                                width={100}
+                                height={100}
                             />
                         </a>
 
@@ -84,6 +87,7 @@ const Navbar = () => {
                                 { path: "/", label: "Home" },
                                 { path: "/about", label: "About Us" },
                                 { path: "/contact", label: "Contact Us" },
+                                { path: "/posts", label: "Posts" },
                                 { path: "/blogs", label: "Blogs" },
 
 
@@ -92,7 +96,7 @@ const Navbar = () => {
                                     key={index}
                                     href={item.path}
                                     className={`
-                                        px-3  py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform  lg:mt-0 dark:text-gray-200 hover:bg-primary hover:text-white dark:hover:bg-gray-700
+                                        px-2.5  py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform  lg:mt-0 dark:text-gray-200 hover:bg-primary hover:text-white dark:hover:bg-gray-700
                                         ${pathname === item.path
                                         && "bg-primary text-white "
 

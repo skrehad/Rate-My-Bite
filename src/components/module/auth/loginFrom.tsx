@@ -43,24 +43,8 @@ const LoginForm = () => {
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
-        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
-        const isPhone = /^\+?[0-9]{7,15}$/.test(data.email);
-        const modifiedData: { email?: string; phone?: string; password: string } = { password: "" }
-        if (isEmail) {
-            modifiedData["email"] = data.email
-        }
-        else if (isPhone) {
-            modifiedData["phone"] = data.email
-        }
-        else {
-            toast.error("Invalid email or phone")
-            return;
-        }
-        modifiedData["password"] = data.password
-        console.log({ modifiedData });
         try {
-            const result = await loginUser(modifiedData);
+            const result = await loginUser(data);
             console.log({ result });
             if (result?.success) {
                 toast.success(result?.message || "Login successful")
@@ -129,7 +113,7 @@ const LoginForm = () => {
                                             <FormControl>
                                                 <Input placeholder="Enter email or phone" className="pl-9 " {...field} />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage className=' text-red-600' />
                                         </div>
                                     </FormItem>
                                 )}
