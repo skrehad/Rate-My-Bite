@@ -1,16 +1,23 @@
 import Link from "next/link";
 
 export default function Footer() {
+  const links = [
+    { label: "Home", href: "/" },
+    { label: "Posts", href: "/posts" },
+    { label: "Blogs", href: "/blogs" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ]
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-10 mt-20 border-t border-gray-300 dark:border-gray-700">
-      <div className="container mx-auto px-4 md:px-8">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-16 mt-20 border-t border-gray-300 dark:border-gray-700">
+      <div className=" px-4 md:px-8 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Info */}
           <div>
             <h2 className="text-xl font-bold text-[#FF3C48] mb-3">
               WebSite Name
             </h2>
-            <p className="text-[16px] font-semibold">
+            <p className="text-[16px] font-medium">
               Enjoy delicious meals from our wide range of categories. Fresh,
               fast, and flavorful — just for you!
             </p>
@@ -18,30 +25,18 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div>
-            <h3 className="text-lg text-[#FF3C48] font-bold mb-2">
+            <h3 className="text-lg text-primary font-bold mb-2">
               Quick Links
             </h3>
-            <ul className="space-y-1 text-[16px] font-semibold">
-              <li>
-                <Link href="/" className="hover:text-[#FF3C48]">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/menu" className="hover:text-[#FF3C48]">
-                  Menu
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-[#FF3C48]">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#FF3C48]">
-                  Contact
-                </Link>
-              </li>
+            <ul className="space-y-2 text-[16px] font-medium ">
+              {
+                links.map(el => <li key={el.label}>
+                  <Link href={el.href} className="hover:text-primary">
+                    {el.label}
+                  </Link>
+                </li>)
+              }
+
             </ul>
           </div>
 
@@ -51,10 +46,10 @@ export default function Footer() {
             <h3 className="text-lg text-[#FF3C48] font-bold mb-4">
               Get in Touch
             </h3>
-            <p className="text-[16px] font-semibold">
+            <p className="text-[16px] font-medium">
               Email: support@foods.com
             </p>
-            <p className="text-[16px] font-semibold">Phone: +880 1234-567890</p>
+            <p className="text-[16px] font-medium">Phone: +880 1234-567890</p>
 
             <div className="flex flex-wrap mt-5 gap-3">
               <Link
