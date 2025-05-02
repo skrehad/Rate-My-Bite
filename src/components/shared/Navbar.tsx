@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
-      <div className="w-full px-5 md:px-12 lg:px-16 py-4 flex justify-between items-center">
+      <div className="container mx-auto py-4 px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
@@ -79,7 +79,7 @@ const Navbar = () => {
                       className="rounded-full"
                     />
                   ) : (
-                    <CircleUserRound size={36} className="text-gray-500" />
+                    <CircleUserRound size={40} className="text-gray-500 cursor-pointer hover:scale-105 duration-500 transition-transform" />
                   )}
                 </button>
               </DropdownMenuTrigger>

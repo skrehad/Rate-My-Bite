@@ -36,6 +36,7 @@ export default function UserProvider({ children }: { children: React.ReactNode }
         setIsLoading,
         logOut
     }
+    // console.log({ user, isLoading })
     return (
         <UserContext.Provider value={authInfo}>
             {children}

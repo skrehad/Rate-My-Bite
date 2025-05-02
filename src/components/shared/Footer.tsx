@@ -9,8 +9,8 @@ export default function Footer() {
     { label: "Contact", href: "/contact" },
   ]
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-16 mt-20 border-t border-gray-300 dark:border-gray-700">
-      <div className=" px-4 md:px-8 lg:px-20">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-12 pb-10 mt-20 border-t border-gray-300 dark:border-gray-700">
+      <div className=" container mx-auto px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Info */}
           <div>
