@@ -21,7 +21,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const { user, logOut } = useAuth()!;
   const [menuOpen, setMenuOpen] = useState(false);
-
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Posts", href: "/posts" },
@@ -35,15 +34,15 @@ const Navbar = () => {
       <div className="container mx-auto py-4 px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image
+          {/* <Image
             src="/logo.png"
             alt="Logo"
             width={40}
             height={40}
             className="rounded"
-          />
+          /> */}
           <span className="text-xl font-bold italic text-black dark:text-white">
-            Tasty Foods
+            Tasty <span className="text-primary">Foods</span>
           </span>
         </Link>
 
@@ -85,7 +84,7 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel>
-                  {user.name || "My Account"}
+                  {user.fullName || "My Account"}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <Link href="/dashboard">
@@ -110,13 +109,13 @@ const Navbar = () => {
             <div className="hidden md:flex gap-3">
               <Link
                 href="/register"
-                className="px-5 py-2 rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300"
+                className="px-4 py-1.5 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold transition duration-300"
               >
                 Sign Up
               </Link>
               <Link
                 href="/login"
-                className="px-5 py-2 rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300"
+                className="px-4 py-1.5 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold transition duration-300"
               >
                 Login
               </Link>
