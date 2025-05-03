@@ -119,7 +119,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
   // const downvotes = post.votes.filter((vote) => vote.status === "DOWNVOTE").length
 
   return (
-    <div className="container max-w-4xl py-8">
+    <div className="container  py-8">
       <Card className="overflow-hidden">
         <div className="relative h-[300px] sm:h-[400px]">
           <Image
