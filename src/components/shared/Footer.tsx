@@ -23,7 +23,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation Links */}
+          {/* Navigation  */}
           <div>
             <h3 className="text-lg text-primary font-bold mb-2">Quick Links</h3>
             <ul className="space-y-2 text-[16px] font-medium ">
