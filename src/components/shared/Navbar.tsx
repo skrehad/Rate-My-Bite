@@ -92,18 +92,18 @@ const Navbar = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <Link href="/dashboard">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
                     Dashboard
                     <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
                   </DropdownMenuItem>
                 </Link>
                 <Link href="/profile">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
                     Profile
                     <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
                   </DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem onClick={logOut}>
+                <DropdownMenuItem onClick={logOut} className="cursor-pointer">
                   Logout
                   <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
                 </DropdownMenuItem>
