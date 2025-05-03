@@ -14,7 +14,7 @@ export default function Banner() {
   }, []);
 
   return (
-    <section className="w-full  bg-secondary py-18 px-6 my-12 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <section className="w-full rounded-2xl  bg-secondary py-18 px-6 my-12 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div
         className={`space-y-6 transition-all duration-700 ease-out ${
           animate ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"

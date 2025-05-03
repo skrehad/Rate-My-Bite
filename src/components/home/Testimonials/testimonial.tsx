@@ -112,7 +112,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <section className="px-4 md:px-10 py-12 bg-white">
+    <section className=" py-12 bg-white">
       <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-12">
         Customer Testimonials
       </h2>
