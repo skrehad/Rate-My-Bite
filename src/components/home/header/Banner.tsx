@@ -27,7 +27,8 @@ export default function Banner() {
           Experience mouth-watering meals made with love and delivered fresh to
           your doorstep. Order now and enjoy exclusive deals!
         </p>
-        <Button className="bg-[#FF3C48]  hover:bg-[#ff3c49ec]  text-white px-6 py-3 rounded-2xl shadow-md text-lg cursor-pointer">
+
+        <Button className="p-5 cursor-pointer bg-white rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 flex  text-lg items-center gap-2">
           Order Now <FaCartArrowDown />
         </Button>
       </div>

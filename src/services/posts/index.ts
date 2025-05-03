@@ -68,7 +68,10 @@ export const createPost = async (postData:Ipost): Promise<any> => {
       method: "POST",
       body: JSON.stringify(postData),
       headers: {
+        "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
+       
+
       },
     });
     revalidateTag("POST");

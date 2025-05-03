@@ -45,48 +45,51 @@ const Createpost = () => {
     };
     fetchCategories();
   }, []);
+// ------------submit form data to server------------------
+const onSubmit = async (data: FormData) => {
+  setLoading(true);
+  try {
+    const files = Array.from(data.image);
+    const uploadPromises = files.map((file) => uploadToCloudinary(file));
+    const imageUrls = (await Promise.all(uploadPromises)).filter(Boolean) as string[];
 
-  const onSubmit = async (data: FormData) => {
-    setLoading(true);
-    try {
-      const files = Array.from(data.image);
-      const uploadPromises = files.map((file) => uploadToCloudinary(file));
-      const imageUrls = (await Promise.all(uploadPromises)).filter(Boolean) as string[];
-
-      if (!imageUrls.length) {
-        alert("Image upload failed.");
-        return;
-      }
-
-      const postData = {
-        title: data.title,
-        description: data.description,
-        location: data.location,
-        priceRange: data.priceRange,
-        price: data.price,
-        image: imageUrls[0],
-        categoryId: data.categoryId,
-        userId: user?.userId,
-      };
-
-      console.log("Sending post data:", postData);
-
-      const result = await createPost(postData as unknown as Ipost);
-      console.log("Post created:", result);
-      reset();
-      alert("Post created successfully!");
-    } catch (err) {
-      console.error("Post creation failed:", err);
-    } finally {
-      setLoading(false);
+    if (!imageUrls.length) {
+      alert("Image upload failed.");
+      return;
     }
-  };
+
+    const postData = {
+      title: data.title,
+      description: data.description,
+      location: data.location,
+      priceRange: data.priceRange,
+      price: data.price,
+      image: imageUrls[0],
+      categoryId: data.categoryId,
+      userId: user?.id, // assuming userId is here
+    };
+
+    console.log("📤 Sending post data to API:", postData); 
+
+    const result = await createPost(postData as Ipost);
+    console.log("✅ Post created:", result); 
+
+    reset();
+    alert("Post created successfully!");
+  } catch (err) {
+    console.error("❌ Post creation failed:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Create New Post</h1>
+      <h1 className="text-2xl text-center font-bold text-gray-800 mb-6">Create New Post</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        {/* ---------title---------- */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
           <input
@@ -97,7 +100,7 @@ const Createpost = () => {
             required
           />
         </div>
-
+{/* ---------------description---------- */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
           <textarea
@@ -108,7 +111,7 @@ const Createpost = () => {
             required
           />
         </div>
-
+{/* ------------location------------ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
@@ -120,6 +123,7 @@ const Createpost = () => {
               required
             />
           </div>
+          {/* ------------ price------------ */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
             <input
@@ -131,7 +135,7 @@ const Createpost = () => {
             />
           </div>
         </div>
-
+{/* ------------price range--------- */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
           <select
@@ -145,7 +149,7 @@ const Createpost = () => {
             <option value="High">High</option>
           </select>
         </div>
-
+{/* --------------category-------------- */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
           <select
@@ -159,7 +163,7 @@ const Createpost = () => {
             ))}
           </select>
         </div>
-
+{/* ---------------image upload----------- */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
           <input

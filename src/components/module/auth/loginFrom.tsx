@@ -39,7 +39,7 @@ const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const searchParams = useSearchParams();
-    const redirect = searchParams.get('redirect') || '/';
+    const redirect = searchParams.get('redirect') || '/dashboard';
     const { setUser } = useAuth()!
     const { isSubmitting } = form.formState
 

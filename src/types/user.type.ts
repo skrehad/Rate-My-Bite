@@ -1,6 +1,5 @@
 export interface IUser {
   id: string;
-  userId: string;
   fullName: string;
   email: string;
   photo?: string;
@@ -8,6 +7,8 @@ export interface IUser {
   role: "USER" | "ADMIN" | "PREMIUM";
   status: "ACTIVE" | "BLOCKED" | "DELETED";
   isDeleted: boolean;
+  isPremium: boolean;
+
   createdAt: string;
   updatedAt: string;
 }
