@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Premium() {
+export default function AdminDataLoading() {
     return (
         <div>
-            <h1>This is Premium</h1>
+            <h1>Loading...</h1>
         </div>
     )
 }

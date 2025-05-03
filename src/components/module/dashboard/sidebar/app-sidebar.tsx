@@ -2,18 +2,6 @@
 
 import * as React from "react"
 import {
-
-    BookOpen,
-
-
-    Frame,
-
-    Map,
-    PieChart,
-    Settings2,
-    SquareTerminal,
-} from "lucide-react"
-import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
@@ -23,114 +11,24 @@ import {
 
 import { NavMain } from "./nav-main"
 import { NavUser } from "./nav-user"
-
-// This is sample data.
-const data = {
-    user: {
-        name: "shadcn",
-        email: "m@example.com",
-        avatar: "/avatars/shadcn.jpg",
-    },
-
-    navMain: [
-        {
-            title: "Dashboard",
-            url: "/dashboard",
-            icon: SquareTerminal,
-
-        },
-        {
-            title: "User",
-            url: "/user",
-            icon: SquareTerminal,
-
-        },
-        {
-            title: "Posts",
-            url: "/posts",
-            icon: SquareTerminal,
-
-        },
-
-
-        {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-            items: [
-                {
-                    title: "Introduction",
-                    url: "#",
-                },
-                {
-                    title: "Get Started",
-                    url: "#",
-                },
-                {
-                    title: "Tutorials",
-                    url: "#",
-                },
-                {
-                    title: "Changelog",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings2,
-            items: [
-                {
-                    title: "General",
-                    url: "#",
-                },
-                {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
-                    url: "#",
-                },
-            ],
-        },
-    ],
-    navSecondary: [
-        {
-            title: "Overview",
-            url: "#",
-            icon: Frame,
-        },
-        {
-            title: "Analytics",
-            url: "#",
-            icon: PieChart,
-        },
-        {
-            title: "Reports",
-            url: "#",
-            icon: Map,
-        },
-    ],
-}
+import { useAuth } from "@/provider/UserProvider"
+import { adminLinks, userLinks } from "./navLinks"
+import { IUser } from "@/types"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const { user, logOut } = useAuth()!
+
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
                 {/* <TeamSwitcher teams={data.teams} /> */}
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
+                <NavMain items={user?.role === "ADMIN" ? adminLinks : userLinks} />
 
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={data.user} />
+                <NavUser logOut={logOut} user={user as IUser} />
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>
