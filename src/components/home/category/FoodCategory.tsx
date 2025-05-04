@@ -8,7 +8,7 @@ const FoodCategory = () => {
       <h2 className="text-3xl lg:text-4xl text-center font-medium  font-serif ">
         Food <span className="text-primary">Categories</span>
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-6">
         {foodCategories.map((category) => (
           <div
             key={category.id}

@@ -1,14 +1,14 @@
 export interface IUser {
-  _id: string;
+  id: string;
+  fullName: string;
   email: string;
-  phone: string;
-  password: string;
-  name: string;
   photo?: string;
-  role: "customer" | "provider";
-  isActive: boolean;
-  address?: string;
-  cuisineSpecialties?: string[];
-  iat: number;
-  exp: number;
+  password: string;
+  role: "USER" | "ADMIN" | "PREMIUM";
+  status: "ACTIVE" | "BLOCKED" | "DELETED";
+  isDeleted: boolean;
+  isPremium: boolean;
+
+  createdAt: string;
+  updatedAt: string;
 }
