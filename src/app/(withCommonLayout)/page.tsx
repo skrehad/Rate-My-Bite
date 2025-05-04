@@ -6,7 +6,7 @@ import { NewsletterSignup } from "@/components/newsLetter/newsLetter";
 
 export default function Home() {
   return (
-    <div>
+    <div className="mx-10">
       <Banner />
       <FoodCategory />
 
