@@ -10,7 +10,8 @@ import { ThumbsUp, ThumbsDown, Star } from "lucide-react"
 import AddCommentForm from "./add-comment-form"
 import AddVoteForm from "./add-vote-form"
 import AddRatingForm from "./add-rating-form"
-
+import { MessageSquare } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
   const res = await getSinglePost(params.postId)
@@ -72,29 +73,59 @@ export default async function PostPage({ params }: { params: { postId: string } 
             </div>
           </div>
 
-          {/* Display Comments */}
-          {post.comments?.length > 0 && (
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Comments</h2>
-              <ul className="space-y-4">
-                {post.comments.map((comment: any) => (
-                  <li key={comment.id} className="p-4 border rounded-md shadow-sm">
-                    <p className="text-sm text-muted-foreground">{comment.text}</p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Posted on {new Date(comment.createdAt).toLocaleDateString("en-US")}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
+         
           <Separator />
 
           {/* Add Comment/Rating/Vote Forms */}
-          <AddCommentForm postId={post.id} />
-          <AddVoteForm postId={post.id} />
-          <AddRatingForm postId={post.id} />
+         <div className="flex  justify-between items-center gap-4 mt-4">
+         <AddCommentForm postId={post.id} />
+         <AddVoteForm postId={post.id} />
+         <AddRatingForm postId={post.id} />
+         </div>
+         
+         
+
+          <Separator />
+
+     
+           {/* Display Comments */}
+           {post.comments?.length > 0 && (
+  <div className="mt-8">
+    <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+      <MessageSquare className="w-5 h-5 text-red-500" />
+      All Comments
+    </h2>
+    <ul className="space-y-4">
+      {post.comments.map((comment: any, idx: number) => (
+        <li
+          key={comment.id}
+          className="flex items-start gap-4 bg-muted p-4 rounded-lg shadow-sm border"
+        >
+          {/* Avatar - use fallback if not available */}
+          <Avatar className="h-10 w-10">
+            <AvatarImage src="/placeholder.svg" alt="user" />
+            <AvatarFallback className="bg-red-500">U</AvatarFallback>
+          </Avatar>
+
+          {/* Comment Body */}
+          <div className="flex-1">
+            <div className="text-sm text-muted-foreground">{comment.text}</div>
+            <p className="text-xs text-gray-500 mt-1">
+              Posted on{" "}
+              {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            {idx !== post.comments.length - 1 && <Separator className="mt-3" />}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
         </CardContent>
 
         <CardFooter />

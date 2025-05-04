@@ -8,6 +8,7 @@ export interface Ipost {
     priceRange: string
     categoryId: string
     userId: string
+    price:number
   }
   export interface Irating{
     value: number
