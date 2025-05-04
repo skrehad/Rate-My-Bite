@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useEffect, useState } from "react"
@@ -7,14 +8,16 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 
 import { getAllposts } from "@/services/posts"
-import { getAllCategory } from "@/services/category" 
-import { PostStatus } from "@/types"
+import { getAllCategory } from "@/services/category"
+import { IPost } from "@/types"
+import { ICategory } from "@/types/category.type"
+
 
 const POSTS_PER_PAGE = 6
 
 export default function PostsPage() {
-  const [posts, setPosts] = useState<any[]>([])
-  const [allCategories, setAllCategories] = useState<any[]>([])
+  const [posts, setPosts] = useState<IPost[]>([])
+  const [allCategories, setAllCategories] = useState<ICategory[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(true)
@@ -32,8 +35,8 @@ export default function PostsPage() {
       try {
         const res = await getAllCategory()
         setAllCategories(res?.data || [])
-      } catch (err) {
-        console.error("Failed to load categories")
+      } catch (err: any) {
+        console.error("Failed to load categories", err)
       }
     }
     fetchCategories()
@@ -217,9 +220,8 @@ export default function PostsPage() {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`px-3 py-1 rounded border text-sm ${
-                  currentPage === i + 1 ? "bg-blue-600 text-white" : "hover:bg-gray-100"
-                }`}
+                className={`px-3 py-1 rounded border text-sm ${currentPage === i + 1 ? "bg-blue-600 text-white" : "hover:bg-gray-100"
+                  }`}
               >
                 {i + 1}
               </button>
