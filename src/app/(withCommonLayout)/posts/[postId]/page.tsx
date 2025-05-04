@@ -1,41 +1,39 @@
-
-
+// app/posts/[postId]/page.tsx
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { getSinglePost } from "@/services/posts"
-
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-import RatingSection from "./rating-section"
-import VoteSection from "./vote-section"
-import PriceTag from "./price-tag"
-
-import { PostStatus } from "@/types"
 import { PostStatusBadge } from "./post-status-badge"
-import CommentSection from "./comment-section"
+import { ThumbsUp, ThumbsDown, Star } from "lucide-react"
+import AddCommentForm from "./add-comment-form"
+import AddVoteForm from "./add-vote-form"
+import AddRatingForm from "./add-rating-form"
+
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
-  const post = await getSinglePost(params?.postId)
-console.log('the single post is',post);
-  if (!post || post instanceof Error) {
-    return notFound()
-  }
+  const res = await getSinglePost(params.postId)
+  if (!res || res instanceof Error) return notFound()
+  const post = res.data
+
+  const upvotes = post.votes?.filter((v: any) => v.status === "UPVOTE").length || 0
+  const downvotes = post.votes?.filter((v: any) => v.status === "DOWNVOTE").length || 0
+  const averageRating =
+    post.ratings?.reduce((acc: number, r: any) => acc + r.value, 0) / post.ratings.length || 0
 
   return (
     <div className="container py-8">
-      <Card className="overflow-hidden">
+      <Card>
         <div className="relative h-[300px] sm:h-[400px]">
           <Image
-            src={post.data.image || "/placeholder.svg?height=400&width=800"}
-            alt={post.data.title}
+            src={post.image || "/placeholder.svg"}
+            alt={post.title}
             fill
             className="object-cover"
-            priority
           />
           <div className="absolute top-4 right-4 flex gap-2">
-            <PostStatusBadge status={post.status as PostStatus} />
+            <PostStatusBadge status={post.status} />
             {post.isPremium && (
               <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
                 Premium
@@ -44,55 +42,62 @@ console.log('the single post is',post);
           </div>
         </div>
 
-        <CardHeader className="flex flex-row items-start justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="outline">{post.category?.name}</Badge>
-              <Badge variant="secondary">{post.priceRange}</Badge>
-            </div>
-            <h1 className="text-2xl font-bold">{post.title}</h1>
-            <p className="text-muted-foreground">{post.location}</p>
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-2">
+            <Badge variant="outline">{post.category?.name}</Badge>
+            <Badge variant="secondary">{post.priceRange}</Badge>
           </div>
-          <PriceTag price={post.price} isPremium={post.isPremium} />
+          <h1 className="text-2xl font-bold">{post.title}</h1>
+          <p className="text-muted-foreground">{post.location}</p>
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <div className="flex items-center gap-3">
-            <Avatar>
-              <AvatarImage src="/placeholder.svg?height=40&width=40" alt={post.user?.name || "User"} />
-              <AvatarFallback>
-                {(post.user?.name || "U").slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="font-medium">{post.user?.email || "No Email"}</p>
-              <p className="text-sm text-muted-foreground">
-                Posted {new Date(post.createdAt).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </p>
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Description</h2>
+            <p className="whitespace-pre-line text-muted-foreground">{post.description}</p>
+          </div>
+
+          <Separator />
+
+          {/* Voting & Rating Info */}
+          <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex items-center gap-2 text-sm">
+              <ThumbsUp className="w-4 h-4 text-green-600" /> {upvotes} Upvotes
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <ThumbsDown className="w-4 h-4 text-red-600" /> {downvotes} Downvotes
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Star className="w-4 h-4 text-yellow-500" /> {averageRating.toFixed(1)} / 5
             </div>
           </div>
 
+          {/* Display Comments */}
+          {post.comments?.length > 0 && (
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold mb-2">Comments</h2>
+              <ul className="space-y-4">
+                {post.comments.map((comment: any) => (
+                  <li key={comment.id} className="p-4 border rounded-md shadow-sm">
+                    <p className="text-sm text-muted-foreground">{comment.text}</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Posted on {new Date(comment.createdAt).toLocaleDateString("en-US")}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <Separator />
 
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Description</h2>
-            <p className="whitespace-pre-line">{post.description}</p>
-          </div>
-
-          <div className="flex flex-wrap gap-4 pt-4">
-            <VoteSection postId={post.id} upvotes={post.upvotes || 0} downvotes={post.downvotes || 0} />
-            <RatingSection postId={post.id} averageRating={post.averageRating || 0} totalRatings={post.totalRatings || 0} />
-          </div>
+          {/* Add Comment/Rating/Vote Forms */}
+          <AddCommentForm postId={post.id} />
+          <AddVoteForm postId={post.id} />
+          <AddRatingForm postId={post.id} />
         </CardContent>
 
-        <CardFooter className="block p-0">
-          <Separator />
-          <CommentSection postId={post.id} comments={post.comments || []} />
-        </CardFooter>
+        <CardFooter />
       </Card>
     </div>
   )

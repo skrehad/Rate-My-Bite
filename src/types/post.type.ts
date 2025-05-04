@@ -9,3 +9,19 @@ export interface Ipost {
     categoryId: string
     userId: string
   }
+  export interface Irating{
+    value: number
+    userId: string
+    postId: string
+  }
+
+  export interface IpostVote {
+    status: "UPVOTE" | "DOWNVOTE"
+    userId: string
+    postId: string
+  }
+  export interface IpostComment {
+    text: string
+    userId: string
+    postId: string
+  }

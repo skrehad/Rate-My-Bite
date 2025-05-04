@@ -1,6 +1,6 @@
 
 "use server";
-import { Ipost } from "@/types";
+import { Ipost, IpostComment, IpostVote, Irating } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -71,7 +71,7 @@ export const updatePost = async (
 ): Promise<any> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/product/${productId}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/${productId}`,
       {
         method: "PATCH",
         body: JSON.stringify(postData),
@@ -81,6 +81,63 @@ export const updatePost = async (
       }
     );
     revalidateTag("POST");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+// ------------add comment----------
+export const addcomment = async (commentData:IpostComment): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
+      method: "POST",
+      body: JSON.stringify(commentData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+       
+
+      },
+    });
+    revalidateTag("COMMENT");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+// ------------add rating----------
+export const addrating = async (commentData:Irating): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {
+      method: "POST",
+      body: JSON.stringify(commentData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+       
+
+      },
+    });
+    revalidateTag("RATING");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+// ------------add vOTE----------
+export const addvote = async (voteData:IpostVote): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/vote`, {
+      method: "POST",
+      body: JSON.stringify(voteData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+       
+
+      },
+    });
+    revalidateTag("VOTE");
     return res.json();
   } catch (error: any) {
     return Error(error);
