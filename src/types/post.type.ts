@@ -6,8 +6,6 @@ export interface Ipost {
     location: string
     image: string
     priceRange: string
-    isPremium: boolean
-    status: string
     categoryId: string
     userId: string
   }

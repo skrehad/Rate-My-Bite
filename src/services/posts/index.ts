@@ -5,43 +5,26 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // get all products
+// lib/api.ts
 export const getAllposts = async (
   page?: string,
   limit?: string,
-  query?: { [key: string]: string | string[] | undefined }
+  query: { [key: string]: string | undefined } = {}
 ) => {
-  const params = new URLSearchParams();
+  const params = new URLSearchParams()
 
-  if (query?.price) {
-    params.append("minPrice", "0");
-    params.append("maxPrice", query?.price.toString());
-  }
+  if (query.searchTerm) params.append("searchTerm", query.searchTerm)
+  if (query.category) params.append("category", query.category)
+  if (query.location) params.append("location", query.location)
+  if (query.minPrice) params.append("minPrice", query.minPrice)
+  if (query.maxPrice) params.append("maxPrice", query.maxPrice)
 
-  if (query?.category) {
-    params.append("categories", query?.category.toString());
-  }
-  if (query?.brand) {
-    params.append("brands", query?.brand.toString());
-  }
-  if (query?.rating) {
-    params.append("ratings", query?.rating.toString());
-  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post?page=${page}&limit=${limit}&${params}`)
+  const data = await res.json()
+  return data
+}
 
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/post?limit=${limit}&page=${page}&${params}`,
-      {
-        next: {
-          tags: ["POST"],
-        },
-      }
-    );
-    const data = await res.json();
-    return data;
-  } catch (error: any) {
-    return Error(error.message);
-  }
-};
+
 
 // get single product
 export const getSinglePost = async (postId: string) => {

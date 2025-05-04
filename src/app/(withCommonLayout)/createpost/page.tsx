@@ -66,7 +66,7 @@ const onSubmit = async (data: FormData) => {
       price: data.price,
       image: imageUrls[0],
       categoryId: data.categoryId,
-      userId: user?.id, // assuming userId is here
+      userId: user?.id, 
     };
 
     console.log("📤 Sending post data to API:", postData); 
