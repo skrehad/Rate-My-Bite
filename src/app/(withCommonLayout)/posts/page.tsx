@@ -5,14 +5,16 @@ import Link from "next/link"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import PostStatusBadge from "./[postId]/post-status-badge"
+
 import { getAllposts } from "@/services/posts"
+import { getAllCategory } from "@/services/category" 
 import { PostStatus } from "@/types"
 
 const POSTS_PER_PAGE = 6
 
 export default function PostsPage() {
   const [posts, setPosts] = useState<any[]>([])
+  const [allCategories, setAllCategories] = useState<any[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(true)
@@ -24,19 +26,32 @@ export default function PostsPage() {
   const [minPrice, setMinPrice] = useState("")
   const [maxPrice, setMaxPrice] = useState("")
 
-  // Fetch Posts
+  // 🔄 Fetch Categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await getAllCategory()
+        setAllCategories(res?.data || [])
+      } catch (err) {
+        console.error("Failed to load categories")
+      }
+    }
+    fetchCategories()
+  }, [])
+
+  // 🔄 Fetch Posts
   const fetchPosts = async () => {
     setLoading(true)
     try {
-      const data = await getAllposts(String(currentPage), String(POSTS_PER_PAGE), {
+      const res = await getAllposts(String(currentPage), String(POSTS_PER_PAGE), {
         searchTerm,
         category,
         location,
         minPrice,
         maxPrice,
       })
-      setPosts(data?.data || [])
-      setTotalPages(Math.ceil((data?.meta?.total || 1) / POSTS_PER_PAGE))
+      setPosts(res?.data || [])
+      setTotalPages(Math.ceil((res?.meta?.total || 1) / POSTS_PER_PAGE))
     } catch (error) {
       console.error("Failed to fetch posts:", error)
     } finally {
@@ -44,12 +59,11 @@ export default function PostsPage() {
     }
   }
 
-  // Fetch when filters or page changes
+  // 🔁 Re-fetch when filters or page change
   useEffect(() => {
     fetchPosts()
   }, [currentPage, searchTerm, category, location, minPrice, maxPrice])
 
-  // Apply filters and reset to page 1
   const handleFilter = () => {
     setCurrentPage(1)
   }
@@ -108,13 +122,21 @@ export default function PostsPage() {
 
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Category</label>
-            <input
-              type="text"
+            <select
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              placeholder="e.g. Lemon Juice"
+              onChange={(e) => {
+                setCategory(e.target.value)
+                setCurrentPage(1)
+              }}
               className="w-full p-1 border rounded text-sm"
-            />
+            >
+              <option value="">All Categories</option>
+              {allCategories.map((cat) => (
+                <option key={cat.id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="mb-4">
@@ -145,7 +167,7 @@ export default function PostsPage() {
           </button>
         </aside>
 
-        {/* Posts Grid */}
+        {/* Posts */}
         <div className="flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {loading ? (
@@ -163,14 +185,14 @@ export default function PostsPage() {
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
                       />
-                      <div className="absolute top-2 right-2 flex gap-2">
+                      {/* <div className="absolute top-2 right-2 flex gap-2">
                         <PostStatusBadge status={post.status as PostStatus} />
                         {post.isPremium && (
                           <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
                             Premium
                           </Badge>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between mb-2">
