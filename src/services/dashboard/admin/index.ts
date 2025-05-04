@@ -1,5 +1,6 @@
 "use server";
 import { generateAccessToken } from "@/services/utils";
+import { IPost } from "@/types";
 import { revalidateTag } from "next/cache";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cookies } from "next/headers";
@@ -130,15 +131,28 @@ export const updateUserStatus = async (
 export const getAllPosts = async (query: { [key: string]: string }) => {
   try {
     let url = `${process.env.NEXT_PUBLIC_API}/post/admin?`;
+
     if (Object.keys(query).length > 0) {
       url += new URLSearchParams(query).toString();
     }
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      next: {
+        tags: ["POSTS"],
+      },
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")?.value as string,
+      },
+    });
     const data = await res.json();
     if (!data?.success && data?.err?.statusCode === 403) {
       const accessToken = (await generateAccessToken()) as string;
       if (accessToken) {
         const res = await fetch(url, {
+          next: {
+            tags: ["POSTS"],
+          },
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -151,6 +165,26 @@ export const getAllPosts = async (query: { [key: string]: string }) => {
       }
     }
     return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+export const updatePost = async (id: string, data: Partial<IPost>) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/post/${id}/update-status`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: (await cookies()).get("accessToken")?.value as string,
+        },
+      }
+    );
+    const result = await res.json();
+    revalidateTag("POSTS");
+    return result;
   } catch (error: any) {
     return Error(error);
   }
