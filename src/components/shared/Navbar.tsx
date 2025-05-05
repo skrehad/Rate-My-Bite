@@ -33,17 +33,15 @@ const Navbar = () => {
     <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
       <div className="container mx-auto py-4 px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          {/* <Image
-            src="/logo.png"
+        <Link href="/" className="flex items-center gap-2 p-0 md:pl-10">
+           <Image
+            src="/image/logo/logo.png"
             alt="Logo"
-            width={40}
-            height={40}
-            className="rounded"
-          /> */}
-          <span className="text-xl font-bold italic text-black dark:text-white">
-            Tasty <span className="text-primary">Foods</span>
-          </span>
+            width={150}
+            height={100}
+            className=""
+          /> 
+          
         </Link>
 
         {/* Desktop Menu */}
