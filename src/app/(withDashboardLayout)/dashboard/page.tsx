@@ -4,17 +4,16 @@ import UserDashboard from '@/components/module/dashboard/user/UserDashboard'
 import { useAuth } from '@/provider/UserProvider'
 
 import React from 'react'
+import DashboardLoading from './loading'
 
 export default function DashboardPage() {
     const { user, isLoading } = useAuth()!
     return (
         <div>
             {
-                !user && isLoading ? <p>Loading....</p> : user?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />
+                !user && isLoading ? <DashboardLoading /> : user?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />
             }
-            {/* {
-                user?.role === "ADMIN" && isLoading ? <AdminDashboard /> : <UserDashboard />
-            } */}
+
         </div>
     )
 }

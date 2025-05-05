@@ -29,10 +29,9 @@ export function PostUpdateModal({ post, onSubmit }: { post: IPost, onSubmit: (id
         resolver: zodResolver(formSchema),
         defaultValues: {
             status: post?.status,
-            // reasons: post?.reasons || ""
+            reasons: post?.reasons || ""
         },
     });
-    // const [reasons, setReasons] = useState(post?.reasons || "")
     const { formState: { isSubmitting } } = form
     const handleSubmit = (data: FormValues) => {
         onSubmit(post?.id, data);
