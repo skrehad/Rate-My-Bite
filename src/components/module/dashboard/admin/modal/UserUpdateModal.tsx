@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogClose,
+
     DialogContent,
 
     DialogHeader,
@@ -67,9 +67,9 @@ export function UserUpdateModal({ user, onSubmit }: { user: IUser, onSubmit: (id
                                     </FormItem>
                                 )}
                             />
-                            <DialogClose asChild>
-                                <Button variant={"outline"} type="submit">Update Status</Button>
-                            </DialogClose>
+
+                            <Button variant={"outline"} type="submit">Update Status</Button>
+
 
 
                         </form>

@@ -32,16 +32,20 @@ interface PostsTableProps {
         total: number
         totalPage: number
     }
+    isPaginate?: boolean
 }
 
-export function PostsTable({ data, meta }: PostsTableProps) {
+export function PostsTable({ data, meta, isPaginate = true }: PostsTableProps) {
     const [currentPage, setCurrentPage] = useState(1)
     const router = useRouter();
     const searchParams = useSearchParams();
     useEffect(() => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("page", String(currentPage));
-        router.push(`?${params.toString()}`);
+        if (isPaginate && Object.keys(meta).length > 0) {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("page", String(currentPage));
+            router.push(`?${params.toString()}`);
+        }
+
     }, [currentPage])
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat("en-US", {
@@ -52,14 +56,20 @@ export function PostsTable({ data, meta }: PostsTableProps) {
 
     // Handle pagination
     const goToNextPage = () => {
-        if (currentPage < meta?.totalPage) {
-            setCurrentPage(currentPage + 1)
+        if (isPaginate && Object.keys(meta).length > 0) {
+
+            if (currentPage < meta?.totalPage) {
+                setCurrentPage(currentPage + 1)
+            }
         }
     }
     const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
+        if (isPaginate && Object.keys(meta).length > 0) {
 
+            if (currentPage > 1) {
+                setCurrentPage(currentPage - 1)
+
+            }
         }
     }
 
@@ -93,8 +103,12 @@ export function PostsTable({ data, meta }: PostsTableProps) {
     }
     const markAsPremium = async (post: IPost, isTrue: boolean) => {
         const toastId = toast.loading("Marking as premium...")
-        if (isTrue === post?.isPremium) {
+        if (isTrue && isTrue === post?.isPremium) {
             toast.error("Already marked as premium", { id: toastId })
+            return
+        }
+        if (!isTrue && isTrue === post?.isPremium) {
+            toast.error("Already marked as not premium", { id: toastId })
             return
         }
         try {
@@ -130,7 +144,7 @@ export function PostsTable({ data, meta }: PostsTableProps) {
                     <TableBody>
                         {data?.map((post) => (
                             <TableRow key={post?.id}>
-                                <TableCell className="font-medium flex gap-2">
+                                <TableCell className="font-medium flex gap-3">
                                     {post?.image ? (
                                         <div className="relative h-10 w-10 overflow-hidden rounded-md">
                                             <Image
@@ -190,31 +204,34 @@ export function PostsTable({ data, meta }: PostsTableProps) {
                     </TableBody>
                 </Table>
             </div>
-
-            <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">
-                    Showing {data?.length} of {meta?.total} posts
-                </div>
-                <div className="flex items-center space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={goToPreviousPage}
-                        className="cursor-pointer"
-                        disabled={currentPage === 1}
-                    >
-                        <ChevronLeft className="h-4 w-4" />
-                        <span className="sr-only">Previous page</span>
-                    </Button>
-                    <div className="text-sm font-medium">
-                        Page {currentPage} of {meta?.totalPage}
+            {
+                isPaginate && Object.keys(meta).length > 0 &&
+                <div className="flex items-center justify-between">
+                    <div className="text-sm text-muted-foreground">
+                        Showing {data?.length} of {meta?.total} posts
                     </div>
-                    <Button variant="outline" size="sm" onClick={goToNextPage} disabled={currentPage === meta?.totalPage}>
-                        <ChevronRight className="h-4 w-4" />
-                        <span className="sr-only">Next page</span>
-                    </Button>
+                    <div className="flex items-center space-x-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={goToPreviousPage}
+                            className="cursor-pointer"
+                            disabled={currentPage === 1}
+                        >
+                            <ChevronLeft className="h-4 w-4" />
+                            <span className="sr-only">Previous page</span>
+                        </Button>
+                        <div className="text-sm font-medium">
+                            Page {currentPage} of {meta?.totalPage}
+                        </div>
+                        <Button variant="outline" size="sm" onClick={goToNextPage} disabled={currentPage === meta?.totalPage}>
+                            <ChevronRight className="h-4 w-4" />
+                            <span className="sr-only">Next page</span>
+                        </Button>
+                    </div>
                 </div>
-            </div>
+            }
+
         </div>
     )
 }

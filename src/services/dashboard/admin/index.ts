@@ -1,6 +1,7 @@
 "use server";
 import { generateAccessToken } from "@/services/utils";
 import { IPost } from "@/types";
+import { ICategory } from "@/types/category.type";
 import { revalidateTag } from "next/cache";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cookies } from "next/headers";
@@ -196,12 +197,24 @@ export const getAllCategories = async (query: { [key: string]: string }) => {
     if (Object.keys(query).length > 0) {
       url += new URLSearchParams(query).toString();
     }
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      next: {
+        tags: ["CATEGORIES"],
+      },
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")?.value as string,
+      },
+    });
     const data = await res.json();
     if (!data?.success && data?.err?.statusCode === 403) {
       const accessToken = (await generateAccessToken()) as string;
       if (accessToken) {
         const res = await fetch(url, {
+          next: {
+            tags: ["CATEGORIES"],
+          },
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -213,6 +226,24 @@ export const getAllCategories = async (query: { [key: string]: string }) => {
         return data;
       }
     }
+    return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+export const createCategory = async (categoryData: Partial<ICategory>) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/category`, {
+      method: "POST",
+      body: JSON.stringify(categoryData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")?.value as string,
+      },
+    });
+    const data = await res.json();
+    revalidateTag("CATEGORIES");
     return data;
   } catch (error: any) {
     return Error(error);
