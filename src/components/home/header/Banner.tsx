@@ -45,7 +45,7 @@ export default function Banner() {
     //     />
     //   </div>
     // </section>
-    <div className="relative inset-0 z-10 pt-28 md:pb-0">
+    <div className="w-full h-screen relative inset-0 z-10 pt-28 md:pb-0">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
