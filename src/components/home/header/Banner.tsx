@@ -84,7 +84,7 @@ export default function Banner() {
       </div>
 
       {/* Divider at bottom */}
-      <div className="absolute inset-x-0 -bottom-0.5 -z-10 text-white">
+      <div className="absolute inset-x-0 -bottom-0.5 -z-10 text-gray-100">
         <Divider />
       </div>
     </div>
