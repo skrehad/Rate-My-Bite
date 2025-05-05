@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,22 +10,22 @@ export default function Footer() {
     { label: "Contact", href: "/contact" },
   ];
   return (
-    <footer className="bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-12 pb-10 mt-20 border-t border-gray-300 dark:border-gray-700">
-      <div className="container mx-auto px-4 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-gradient-to-b from-gray-800 to-gray-900  text-white pt-12 pb-10">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:pl-5 items-center w-full">
           {/* Brand Info */}
-          <div>
-            <h2 className="text-xl font-bold text-[#FF3C48] mb-3">
-              WebSite Name
-            </h2>
-            <p className="text-[16px] font-medium">
-              Enjoy delicious meals from our wide range of categories. Fresh,
-              fast, and flavorful — just for you!
-            </p>
-          </div>
+         <div className=" pb-8 mx-auto">
+                     <Image
+                       src="/image/logo/🦆 icon _dish spoon knife_.png"
+                       height={100}
+                       width={100}
+                       alt="logo icon"
+                     />
+                     <span className=" text-lg font-mono">Rate My Bite</span>
+                   </div>
 
           {/* Navigation  */}
-          <div>
+          <div className="mx-auto text-center md:text-start">
             <h3 className="text-lg text-primary font-bold mb-2">Quick Links</h3>
             <ul className="space-y-2 text-[16px] font-medium ">
               {links.map((el) => (
@@ -39,7 +40,7 @@ export default function Footer() {
 
           {/* Contact & Social */}
 
-          <div>
+          <div className="mx-auto text-center">
             <h3 className="text-lg text-[#FF3C48] font-bold mb-4">
               Get in Touch
             </h3>

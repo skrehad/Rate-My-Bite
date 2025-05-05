@@ -7,7 +7,7 @@ const CommonLayout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="">
         <Navbar />
-        <div className="container mx-auto  mt-12 px-5 md:px-0">
+        <div className=" mx-auto  px-5 md:px-0">
         <Toaster richColors position="top-center" />
           {children}
           </div>
