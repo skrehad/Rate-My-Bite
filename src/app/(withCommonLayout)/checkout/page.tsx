@@ -206,11 +206,11 @@ const CheckoutPage = () => {
                   Premium
                 </div>
               </div>
-              
+
               <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm border-b border-gray-200 dark:border-gray-700 pb-3">
                 {selectedPlan.description}
               </p>
-              
+
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
@@ -221,7 +221,7 @@ const CheckoutPage = () => {
                   </span>
                   <span className="dark:text-white text-sm font-medium">{selectedPlan.duration} days</span>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
                     <span className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center mr-2">
@@ -403,7 +403,7 @@ const CheckoutPage = () => {
                   </>
                 )}
               </Button>
-              
+
               <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-3">
                 Your payment information is securely processed by ShurjoPay
               </p>

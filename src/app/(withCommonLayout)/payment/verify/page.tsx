@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle, Loader2, Home, BookOpen, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { fetchWithAuth, isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/auth";
 import { verifyPayment } from "@/lib/shurjopay";
 import { motion } from "framer-motion";
 
@@ -59,7 +59,7 @@ const VerifyPaymentPage = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
@@ -68,7 +68,7 @@ const VerifyPaymentPage = () => {
         <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700">
           {/* Colored top border */}
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-purple-500 to-blue-500"></div>
-          
+
           <div className="p-6">
             {status === "loading" && (
               <div className="flex flex-col items-center py-4">
@@ -81,7 +81,7 @@ const VerifyPaymentPage = () => {
                   Please wait while we verify your transaction...
                 </p>
                 <div className="w-full max-w-xs bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className="h-full bg-gradient-to-r from-primary to-purple-600"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
@@ -93,7 +93,7 @@ const VerifyPaymentPage = () => {
 
             {status === "success" && (
               <div className="flex flex-col items-center py-4">
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -103,7 +103,7 @@ const VerifyPaymentPage = () => {
                 </motion.div>
                 <h1 className="text-xl font-bold mt-4 mb-1 bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">Payment Successful!</h1>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-5 max-w-xs text-center">{message}</p>
-                
+
                 <div className="space-y-2 w-full">
                   <Button asChild className="w-full py-2 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-medium rounded-lg transition-all duration-200 transform hover:translate-y-[-1px]">
                     <Link href="/posts" className="flex items-center justify-center">
@@ -118,7 +118,7 @@ const VerifyPaymentPage = () => {
                     </Link>
                   </Button>
                 </div>
-                
+
                 <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 w-full">
                   <p className="text-xs text-center text-gray-500 dark:text-gray-400">
                     Transaction ID: {order_id}
@@ -129,7 +129,7 @@ const VerifyPaymentPage = () => {
 
             {status === "failed" && (
               <div className="flex flex-col items-center py-4">
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -139,7 +139,7 @@ const VerifyPaymentPage = () => {
                 </motion.div>
                 <h1 className="text-xl font-bold mt-4 mb-1 bg-gradient-to-r from-red-500 to-orange-600 bg-clip-text text-transparent">Payment Failed</h1>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-5 max-w-xs text-center">{message}</p>
-                
+
                 <div className="space-y-2 w-full">
                   <Button asChild className="w-full py-2 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-500/90 hover:to-orange-600/90 text-white font-medium rounded-lg transition-all duration-200 transform hover:translate-y-[-1px]">
                     <Link href="/checkout" className="flex items-center justify-center">
@@ -158,7 +158,7 @@ const VerifyPaymentPage = () => {
             )}
           </div>
         </div>
-        
+
         <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-3">
           Secured by ShurjoPay Payment Gateway
         </p>
