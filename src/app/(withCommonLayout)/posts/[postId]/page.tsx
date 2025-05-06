@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // app/posts/[postId]/page.tsx
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -16,8 +17,8 @@ import { IVote } from "@/types/vote.type"
 import { IRating } from "@/types/rating.type"
 import { IComment } from "@/types/comment.type"
 
-export default async function PostPage({ params }: { params: { postId: string } }) {
-  const res = await getSinglePost(params.postId)
+export default async function PostPage(props: any) {
+  const res = await getSinglePost(props?.params.postId)
   if (!res || res instanceof Error) return notFound()
   const post = res.data
 
