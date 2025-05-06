@@ -31,19 +31,17 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
-      <div className=" mx-10 py-4 px-4 md:px-0 flex justify-between items-center">
+      <div className="container mx-auto  px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          {/* <Image
-            src="/logo.png"
+        <Link href="/" className="flex items-center gap-2 p-0 ">
+          <Image
+            src="/image/logo/logo.png"
             alt="Logo"
-            width={40}
-            height={40}
-            className="rounded"
-          /> */}
-          <span className="text-xl font-bold italic text-black dark:text-white">
-            Tasty <span className="text-primary">Foods</span>
-          </span>
+            width={120}
+            height={120}
+            className=""
+          />
+
         </Link>
 
         {/* Desktop Menu */}
@@ -52,11 +50,10 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-base font-semibold transition-colors ${
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-gray-800 dark:text-white hover:text-primary"
-              }`}
+              className={`text-base font-semibold transition-colors ${pathname === item.href
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
+                }`}
             >
               {item.label}
             </Link>
@@ -91,7 +88,7 @@ const Navbar = () => {
                   {user.fullName || "My Account"}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href="/dashboard">
+                <Link href={user?.role === 'ADMIN' ? "/admin/dashboard" : "/user/dashboard"}>
                   <DropdownMenuItem className="cursor-pointer">
                     Dashboard
                     <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
@@ -142,11 +139,10 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`block font-semibold text-md ${
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-gray-800 dark:text-white hover:text-primary"
-              }`}
+              className={`block font-semibold text-md ${pathname === item.href
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
+                }`}
             >
               {item.label}
             </Link>
