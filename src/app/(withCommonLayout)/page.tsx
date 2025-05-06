@@ -7,13 +7,15 @@ import { NewsletterSignup } from "@/components/newsLetter/newsLetter";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="space-y-28">
       <Banner />
-      <FoodCategory />
+      <div className="container  space-y-24 mx-auto">
+        <FoodCategory />
 
-      <Testimonial />
-      <HowItWorks></HowItWorks>
-      <Gallery />
+        <Testimonial />
+        <HowItWorks></HowItWorks>
+        <Gallery />
+      </div>
       <NewsletterSignup />
     </div>
   );

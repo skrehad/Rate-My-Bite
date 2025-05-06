@@ -101,12 +101,11 @@ const steps = [
 
 export default function HowItWorks() {
   const cardStyles =
-    "bg-white dark:bg-gray-800 rounded-xl shadow p-6 text-center space-y-4 transition-colors duration-300 shadow-md shadow-[#FF3C48] transition transform hover:-translate-y-1 ";
+    "bg-white dark:bg-gray-800 rounded-xl shadow px-4 py-5 text-center space-y-2 transition-all cursor-pointer duration-300 shadow-md shadow-[#FF3C48] transition transform hover:-translate-y-1  ";
 
   const textStyle = "text-gray-600 dark:text-gray-300  ";
   return (
-    <section className="text-center py-16 bg-white relative">
-      <p className=" font-medium mb-2 uppercase">Find Out Here</p>
+    <section className="text-center   bg-white relative">
       <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#FF3C48]">
         How It Works Step by Step
       </h2>

@@ -4,7 +4,7 @@ import { foodCategories } from "./data/foodCategories";
 
 const FoodCategory = () => {
   return (
-    <section className="py-12 rounded-2xl px-6 md:px-16 bg-gray-100 dark:bg-gray-800">
+    <section className="p-12 rounded-2xl  bg-gray-100 dark:bg-gray-800">
       <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary md:pb-3">Search By Cuisine</h2>
       <p className="text-center text-gray-600 pb-6">Explore restaurants and cafes by your favorite cuisine</p>
       <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-6">
