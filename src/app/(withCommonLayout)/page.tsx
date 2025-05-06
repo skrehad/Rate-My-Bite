@@ -8,7 +8,7 @@ import { NewsletterSignup } from "@/components/newsLetter/newsLetter";
 
 export default function Home() {
   return (
-    <div className="space-y-28">
+    <div className="space-y-10">
       <Banner />
       <FoodCategory />
       <SubscriptionPlans />

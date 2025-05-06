@@ -1,76 +1,17 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import useAuthCheck from '@/hooks/useAuthCheck';
-
-interface PlanFeature {
-  feature: string;
-  included: boolean;
-}
-
-interface SubscriptionPlan {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  duration: number;
-  features: PlanFeature[];
-}
-
-const plans: SubscriptionPlan[] = [
-  {
-    id: "FREE",
-    name: "Free",
-    price: 0,
-    description: "Basic access to street food spots",
-    duration: 0,
-    features: [
-      { feature: "Access to public food posts", included: true },
-      { feature: "Comment on food posts", included: true },
-      { feature: "Rate food spots (1-5 stars)", included: true },
-      { feature: "Vote on food posts", included: true },
-      { feature: "Access to premium content", included: false },
-      { feature: "No ads experience", included: false },
-    ],
-  },
-  {
-    id: "MONTHLY",
-    name: "Monthly Premium",
-    price: 299,
-    description: "Full access for 30 days",
-    duration: 30,
-    features: [
-      { feature: "Access to public food posts", included: true },
-      { feature: "Comment on food posts", included: true },
-      { feature: "Rate food spots (1-5 stars)", included: true },
-      { feature: "Vote on food posts", included: true },
-      { feature: "Access to premium content", included: true },
-      { feature: "No ads experience", included: true },
-    ],
-  },
-  {
-    id: "YEARLY",
-    name: "Yearly Premium",
-    price: 2499,
-    description: "Full access for 1 year (save 30%)",
-    duration: 365,
-    features: [
-      { feature: "Access to public food posts", included: true },
-      { feature: "Comment on food posts", included: true },
-      { feature: "Rate food spots (1-5 stars)", included: true },
-      { feature: "Vote on food posts", included: true },
-      { feature: "Access to premium content", included: true },
-      { feature: "No ads experience", included: true },
-    ],
-  },
-];
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import useAuthCheck from "@/hooks/useAuthCheck";
+import { FiCheck, FiX } from "react-icons/fi";
+import { subscriptionPlans } from "@/data/subscriptionPlans";
+import { motion } from "framer-motion";
+import { RiVipCrownFill } from "react-icons/ri";
+import { BsStars } from "react-icons/bs";
 
 const SubscriptionPlans = () => {
   const { isLoggedIn } = useAuthCheck();
-  console.log({isLoggedIn});
   const router = useRouter();
 
   const handleSubscribe = (planId: string) => {
@@ -91,56 +32,92 @@ const SubscriptionPlans = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-10 sm:py-14 md:py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container px-4 mx-auto">
-        <div className="max-w-2xl mx-auto mb-16 text-center">
-          <h2 className="text-4xl font-bold tracking-tight">Premium Subscription Plans</h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Unlock exclusive street food discoveries with our premium plans. Access curated posts that only premium members can see.
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 text-center"
+        >
+          <div className="inline-block mb-3">
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+              <BsStars className="mr-1" /> Unlock Premium Features
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight dark:text-white mb-3 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+            Choose Your Perfect Plan
+          </h2>
+          <p className="mt-2 text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Discover exclusive street food spots that only premium members can
+            access. Upgrade to unlock all premium content and hidden gems.
           </p>
-        </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {plans.map((plan) => (
-            <div
+        </motion.div>
+
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {subscriptionPlans.map((plan, index) => (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
               key={plan.id}
-              className={`flex flex-col p-6 rounded-lg shadow-lg ${
-                plan.id === "MONTHLY" ? "border-2 border-primary relative" : "border border-gray-200"
-              } bg-white`}
+              className={`flex flex-col p-5 sm:p-6 rounded-2xl shadow-xl ${
+                plan.id === "MONTHLY"
+                  ? "border-2 border-primary relative bg-gradient-to-b from-white to-primary/5 dark:from-gray-800 dark:to-primary/10 transform scale-105 z-10"
+                  : "border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+              } transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
             >
               {plan.id === "MONTHLY" && (
-                <span className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-semibold py-1 px-3 rounded-full">
-                  POPULAR
-                </span>
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-purple-600 text-white text-xs font-bold py-1 px-4 rounded-full flex items-center shadow-lg">
+                  <RiVipCrownFill className="mr-1" /> MOST POPULAR
+                </div>
               )}
               <div className="flex-1">
-                <h3 className="text-2xl font-bold">{plan.name}</h3>
-                <div className="mt-4 mb-6">
-                  <span className="text-4xl font-bold">৳{plan.price}</span>
+                <h3 className="text-xl sm:text-2xl font-bold dark:text-white mb-1">
+                  {plan.name}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                  {plan.description}
+                </p>
+
+                <div className="mt-2 mb-4">
+                  <span className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                    ৳{plan.price}
+                  </span>
                   {plan.duration > 0 && (
-                    <span className="text-gray-600 ml-1">
+                    <span className="text-gray-600 dark:text-gray-400 ml-2 text-sm">
                       /{plan.duration === 30 ? "month" : "year"}
                     </span>
                   )}
                 </div>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
-                <ul className="mb-8 space-y-3">
+
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent my-4"></div>
+
+                <ul className="mb-5 space-y-2">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <div
                         className={`${
-                          feature.included ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
-                        } rounded-full p-1 mr-2`}
+                          feature.included
+                            ? "bg-green-100 text-green-600 dark:bg-green-900/40 dark:text-green-400"
+                            : "bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400"
+                        } rounded-full p-1 mr-2 flex-shrink-0`}
                       >
                         {feature.included ? (
-                          <Check size={16} />
+                          <FiCheck size={14} />
                         ) : (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x">
-                            <path d="M18 6 6 18" />
-                            <path d="m6 6 12 12" />
-                          </svg>
+                          <FiX size={14} />
                         )}
                       </div>
-                      <span className={feature.included ? "text-gray-800" : "text-gray-500"}>
+                      <span
+                        className={`text-xs sm:text-sm ${
+                          feature.included
+                            ? "text-gray-800 dark:text-gray-200 font-medium"
+                            : "text-gray-500 dark:text-gray-400"
+                        }`}
+                      >
                         {feature.feature}
                       </span>
                     </li>
@@ -150,13 +127,17 @@ const SubscriptionPlans = () => {
               <Button
                 onClick={() => handleSubscribe(plan.id)}
                 variant={plan.id === "FREE" ? "outline" : "default"}
-                className={`w-full cursor-pointer ${
-                  plan.id === "MONTHLY" ? "bg-primary hover:bg-primary/90" : ""
+                className={`w-full cursor-pointer text-sm sm:text-base py-2 rounded-xl font-medium transition-all duration-300 ${
+                  plan.id === "MONTHLY"
+                    ? "bg-gradient-to-r from-primary to-purple-600 hover:shadow-lg hover:shadow-primary/20"
+                    : plan.id === "FREE"
+                    ? "border-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    : "hover:shadow-md"
                 }`}
               >
-                {plan.id === "FREE" ? "Current Plan" : "Subscribe"}
+                {plan.id === "FREE" ? "Current Plan" : "Subscribe Now"}
               </Button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -164,4 +145,4 @@ const SubscriptionPlans = () => {
   );
 };
 
-export default SubscriptionPlans; 
+export default SubscriptionPlans;

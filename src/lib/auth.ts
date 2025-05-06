@@ -11,24 +11,14 @@ interface JWTPayload {
   iat: number;
 }
 
-/**
- * Set access token in cookies
- */
 export const setAccessToken = (token: string): void => {
-  // Set HttpOnly cookie through document.cookie (in production this should be done by the server)
   document.cookie = `accessToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 days
 };
 
-/**
- * Remove access token from cookies
- */
 export const removeAccessToken = (): void => {
   document.cookie = "accessToken=; path=/; max-age=0";
 };
 
-/**
- * Get access token from cookies
- */
 export const getAccessToken = (): string | null => {
   if (typeof window === 'undefined') return null;
   
@@ -40,9 +30,6 @@ export const getAccessToken = (): string | null => {
   return tokenCookie.trim().substring('accessToken='.length);
 };
 
-/**
- * Check if the user is logged in
- */
 export const isAuthenticated = (): boolean => {
   const token = getAccessToken();
   if (!token) return false;
@@ -58,9 +45,6 @@ export const isAuthenticated = (): boolean => {
   }
 };
 
-/**
- * Get user data from token
- */
 export const getUserFromToken = (): Partial<JWTPayload> | null => {
   const token = getAccessToken();
   if (!token) return null;
@@ -74,9 +58,6 @@ export const getUserFromToken = (): Partial<JWTPayload> | null => {
   }
 };
 
-/**
- * Attach auth token to fetch requests
- */
 export const fetchWithAuth = async (url: string, options: RequestInit = {}): Promise<Response> => {
   const token = getAccessToken();
   
