@@ -177,9 +177,6 @@ const Testimonial = () => {
                 <p className="mt-4 text-left line-clamp-3 text-gray-700">{testimonial.testimonial}</p>
                 <p className="text-left text-sm mt-4 text-gray-500">--{testimonial.location}</p>
               </blockquote>
-
-
-
             </div>
           ))}
         </div>
