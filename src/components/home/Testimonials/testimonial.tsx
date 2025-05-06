@@ -141,7 +141,6 @@ const Testimonial = () => {
     <section className="bg-white  py-12">
       <div className=" text-center">
 
-        {/* <h2 className="text-3xl lg:text-4xl font-medium mb-5 font-serif text-primary"> </h2> */}
         <TextSizer title="What Our Premium Users Say" />
         <div ref={sliderRef} className="keen-slider mt-6">
           {testimonials.map((testimonial) => (
