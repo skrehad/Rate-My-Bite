@@ -130,12 +130,3 @@ npm run build
 - **Posts**: Edit or delete existing posts
 - **Category**: View and manage category
 
-## 🚢 Deployment
-
-### Build for Production
-
-\\\bash
-npm run build
-# or
-yarn build
-\\\
