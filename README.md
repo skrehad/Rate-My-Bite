@@ -1,10 +1,10 @@
-# Street Food Finder
+# Rate My Bite
 
-![Street Food Finder](https://placeholder.svg?height=200&width=600)
+https://project-9-client.vercel.app/
 
 ## 🍔 Overview
 
-Street Food Finder is a Next.js web application where users can discover, post, and review street food spots. The platform features premium content for subscribed users, an admin dashboard for content moderation, and a comprehensive street food discovery experience.
+Rate My Bite is a Next.js web application where users can discover, post, and review street food spots. The platform features premium content for subscribed users, an admin dashboard for content moderation, and a comprehensive street food discovery experience.
 
 ## ✨ Features
 
@@ -29,7 +29,6 @@ Street Food Finder is a Next.js web application where users can discover, post, 
   - Upvote/downvote food spots
   - Rate spots from 1-5 stars
   - Comment on posts
-  - Share food spots
 
 - **Premium Features**
   - Subscribe to access exclusive premium content
@@ -101,59 +100,15 @@ Create a `.env.local` file in the root directory with the following variables:
 
 \`\`\`
 # API Configuration
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_API=https://assignment9-flax.vercel.app/api
 
-# Authentication
-NEXT_PUBLIC_JWT_EXPIRES_IN=7d
-
-# Payment Gateway (Choose one)
-# ShurjoPay
-NEXT_PUBLIC_PAYMENT_GATEWAY=shurjopay
-NEXT_PUBLIC_SHURJOPAY_API_URL=https://sandbox.shurjopayment.com
-
-# SSLCommerz
-# NEXT_PUBLIC_PAYMENT_GATEWAY=sslcommerz
-# NEXT_PUBLIC_SSLCOMMERZ_API_URL=https://sandbox.sslcommerz.com
-
-# Google Maps (if using maps for location)
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-\`\`\`
-
-## 📁 Project Structure
-
-\`\`\`
-street-food-finder/
-├── app/                    # Next.js App Router
-│   ├── (auth)/             # Authentication routes
-│   ├── (dashboard)/        # Admin dashboard routes
-│   ├── (main)/             # Main application routes
-│   ├── api/                # API routes
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Home page
-├── components/             # Reusable components
-│   ├── ui/                 # UI components
-│   ├── forms/              # Form components
-│   ├── layout/             # Layout components
-│   └── features/           # Feature-specific components
-├── lib/                    # Utility functions
-│   ├── api.ts              # API client
-│   ├── auth.ts             # Authentication utilities
-│   └── utils.ts            # General utilities
-├── hooks/                  # Custom React hooks
-├── types/                  # TypeScript type definitions
-├── public/                 # Static assets
-├── styles/                 # Global styles
-├── next.config.js          # Next.js configuration
-├── tailwind.config.js      # Tailwind CSS configuration
-└── tsconfig.json           # TypeScript configuration
-\`\`\`
 
 ## 📱 Pages & Features
 
 ### Public Pages
 - **Home**: Featured food spots and search
-- **Explore**: Browse all food spots with filters
-- **Food Spot Details**: View details, ratings, and comments
+- **Posts**: Browse all food spots with filters
+- **Blogs**: View all blogs
 - **Login/Register**: User authentication
 - **About**: Information about the platform
 - **Contact**: Contact form
@@ -169,45 +124,16 @@ street-food-finder/
 
 ### Admin Pages
 - **Dashboard**: Overview of platform statistics
-- **Pending Posts**: Review and approve/reject posts
-- **Manage Posts**: Edit or delete existing posts
-- **Manage Users**: View and manage user accounts
-- **Manage Comments**: Moderate user comments
+- **Users**: View and manage user
+- **Posts**: Edit or delete existing posts
+- **Category**: View and manage category
 
 ## 🚢 Deployment
 
 ### Build for Production
 
-\`\`\`bash
+\\\bash
 npm run build
 # or
 yarn build
-\`\`\`
-
-### Deployment Options
-
-- **Vercel**:
-  - Connect your GitHub repository
-  - Set environment variables
-  - Deploy
-
-- **Netlify**:
-  - Connect your GitHub repository
-  - Set environment variables
-  - Deploy
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📞 Contact
-
-If you have any questions or feedback, please reach out to [your-email@example.com](mailto:your-email@example.com).
+\\\
