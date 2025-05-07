@@ -49,18 +49,16 @@ Rate My Bite is a Next.js web application where users can discover, post, and re
 
 - **Framework**: Next.js
 - **Styling**: Tailwind CSS
-- **State Management**: React Context API / Redux
 - **Form Handling**: React Hook Form
 - **Validation**: Zod
-- **HTTP Client**: Axios
 - **Authentication**: JWT
-- **Payment**: ShurjoPay/SSLCommerz
+- **Payment**: ShurjoPay
 
 ## 📋 Prerequisites
 
 - Node.js (v16+)
 - npm or yarn
-- Backend API running (see [Rate My Bite](https://github.com/your-username/street-food-finder-api))
+- Backend API running (see [Rate My Bite](https://github.com/Al-amin07/project-9-server))
 
 ## Getting Started
 
