@@ -18,6 +18,7 @@ import { IUser } from "@/types"
 import { UserCircle } from "lucide-react"
 import Link from "next/link"
 import { PuffLoader } from "react-spinners"
+import Image from "next/image"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { user, logOut, isLoading } = useAuth()!
@@ -30,7 +31,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarHeader>
                     <div className="">
 
-                        <Link href={'/'} className={`text-2xl block mx-auto text-center w-full font-semibold text-primary py-4 hover:scale-110 transition-all duration-400 ${!open ? "opacity-0" : ""} transition-all duration-1000`}>RateMyBite  </Link>
+                        <Link href="/" className="flex items-center justify-center gap-2 p-0 ">
+                            <Image
+                                src="/image/logo/logo.png"
+                                alt="Logo"
+                                width={150}
+                                height={150}
+                                className=""
+                            />
+
+                        </Link>
                         <div className="flex flex-col gap-5
                      p-2 border-y border-gray-200 bg-white">
 

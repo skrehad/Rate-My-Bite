@@ -37,11 +37,6 @@ export const userLinks = [
         icon: SquareTerminal,
     },
     {
-        title: "Users",
-        href: "/users",
-        icon: Users,
-    },
-    {
         title: "My Posts",
         href: "/user/posts",
         icon: Users,

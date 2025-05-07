@@ -91,15 +91,15 @@ const Createpost = () => {
       const result = await createPost(postData)
       console.log({ result })
       if (result?.success) {
-        toast.success("✅ Post created successfully! Wait for admin approval")
-        route.push('/posts')
+        toast.success("Post created successfully! Wait for admin approval")
+        route.push('/user/posts')
         reset()
         setImagePreview(null)
       } else {
-        toast.error("❌ Failed to create post")
+        toast.error("Failed to create post")
       }
     } catch (err) {
-      toast.error("❌ Post creation failed")
+      toast.error("Post creation failed")
     } finally {
       setLoading(false)
     }

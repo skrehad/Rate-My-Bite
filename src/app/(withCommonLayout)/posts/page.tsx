@@ -14,6 +14,7 @@ import { IPost } from "@/types"
 import { ICategory } from "@/types/category.type"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { PuffLoader } from "react-spinners"
 
 
 const POSTS_PER_PAGE = 6
@@ -178,40 +179,46 @@ export default function PostsPage() {
 
         {/* Posts */}
         <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {loading ? (
-              <p>Loading...</p>
+              <div className=' min-h-[500px]  w-full flex justify-center items-center col-span-1 sm:col-span-2 xl:col-span-3'>
+                <PuffLoader
+                  color="#FF3C48"
+                  size={100}
+                  speedMultiplier={1}
+                />
+              </div>
             ) : posts.length === 0 ? (
               <p>No posts found.</p>
             ) : (
-              posts.map((post) => (
-                <Link href={`/posts/${post.id}`} key={post.id} className="group">
-                  <Card className="overflow-hidden h-full transition-all hover:shadow-md">
+              posts?.map((post) => (
+                <Link href={`/posts/${post.id}`} key={post?.id} className="group">
+                  <Card className="overflow-hidden py-0 h-full transition-all hover:shadow-md">
                     <div className="relative aspect-video">
                       <Image
-                        src={post.image || "/placeholder.svg"}
-                        alt={post.title}
+                        src={post?.image || "/placeholder.svg"}
+                        alt={post?.title}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
                       />
-                      {/* <div className="absolute top-2 right-2 flex gap-2">
-                        <PostStatusBadge status={post.status as PostStatus} />
+                      <div className="absolute top-2 right-2 flex gap-2">
+                        {/* <PostStatusBadge status={post?.status as PostStatus} /> */}
                         {post.isPremium && (
-                          <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
+                          <Badge variant="default" className=" text-white hover:bg-primary/90">
                             Premium
                           </Badge>
                         )}
-                      </div> */}
+                      </div>
                     </div>
-                    <CardContent className="p-4">
+                    <CardContent className="">
                       <div className="flex items-center justify-between mb-2">
                         <Badge variant="outline">{post.category?.name}</Badge>
                         <span className="font-semibold text-muted-foreground text-sm">{post.location}</span>
                       </div>
                       <h2 className="text-xl font-semibold mb-2 line-clamp-1">{post.title}</h2>
-                      <p className="text-muted-foreground text-sm line-clamp-2 mb-4">{post.description}</p>
+                      <p className="text-muted-foreground text-sm line-clamp-2 mb-1">{post.description}</p>
                     </CardContent>
-                    <CardFooter className="p-4 pt-0 flex justify-between items-center">
+                    <CardFooter className=" pt-0 pb-3 flex justify-between items-center">
                       <Badge variant="secondary">{post.priceRange}</Badge>
                     </CardFooter>
                   </Card>
@@ -221,32 +228,34 @@ export default function PostsPage() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center mt-6 gap-2">
-            <Button
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage(currentPage - 1)}
-              className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
-            >
-              <ArrowLeft />
-            </Button>
-            {Array.from({ length: totalPages }, (_, i) => (
+          {
+            !loading && <div className="flex justify-center items-center mt-6 gap-2">
               <Button
-                key={i}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`px-4 py-1.5 rounded border  ${currentPage === i + 1 ? "bg-primary text-white" : "bg-transparent text-black hover:bg-primary hover:text-white"}
-                  }`}
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
               >
-                {i + 1}
+                <ArrowLeft />
               </Button>
-            ))}
-            <Button
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage(currentPage + 1)}
-              className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
-            >
-              <ArrowRight />
-            </Button>
-          </div>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <Button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-1.5 rounded border  ${currentPage === i + 1 ? "bg-primary text-white" : "bg-transparent text-black hover:bg-primary hover:text-white"}
+                }`}
+                >
+                  {i + 1}
+                </Button>
+              ))}
+              <Button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
+              >
+                <ArrowRight />
+              </Button>
+            </div>
+          }
         </div>
       </div>
     </div>

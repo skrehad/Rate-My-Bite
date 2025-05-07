@@ -9,7 +9,7 @@ import React from 'react'
 
 export default function PostCard({ spot }: { spot: IPost & { averageRating: number } }) {
     return (
-        <Card key={spot.id} className="overflow-hidden h-full flex flex-col">
+        <Card key={spot.id} className="overflow-hidden py-0 h-full flex flex-col">
             <div className="relative h-48">
                 <Image src={spot.image || "/placeholder.svg"} alt={spot.title} fill className="object-cover" />
                 {spot.isPremium && (
@@ -25,10 +25,10 @@ export default function PostCard({ spot }: { spot: IPost & { averageRating: numb
                     </Badge>
                 </div>
             </div>
-            <CardHeader className="pb-2">
+            <CardHeader className="">
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-xl">{spot.title}</CardTitle>
-                    <span className="text-sm font-medium text-gray-500">{spot.price} TK</span>
+                    <span className="text-sm whitespace-nowrap font-medium text-gray-500">{spot.price} TK</span>
                 </div>
                 <div className="flex items-center text-sm text-gray-500">
                     <MapPin className="h-3 w-3 mr-1" />
@@ -39,7 +39,7 @@ export default function PostCard({ spot }: { spot: IPost & { averageRating: numb
                 <CardDescription
                     className="line-clamp-2">{spot.description}</CardDescription>
             </CardContent>
-            <CardFooter className="pt-0 flex justify-between">
+            <CardFooter className="pt-0 pb-3 flex justify-between">
                 <div className="flex items-center">
                     <div className="flex">
                         {[...Array(spot.averageRating || 5)].map((_, i) => (

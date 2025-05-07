@@ -25,7 +25,15 @@ export const getAllposts = async (
   if (query.maxPrice) params.append("maxPrice", query.maxPrice);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/post?page=${page}&limit=${limit}&${params}`
+    `${process.env.NEXT_PUBLIC_API}/post?page=${page}&limit=${limit}&${params}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          ((await cookies()).get("accessToken")?.value as string) || "",
+      },
+    }
   );
   const data = await res.json();
   return data;
