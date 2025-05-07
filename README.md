@@ -60,47 +60,49 @@ Rate My Bite is a Next.js web application where users can discover, post, and re
 
 - Node.js (v16+)
 - npm or yarn
-- Backend API running (see [Street Food Finder API](https://github.com/your-username/street-food-finder-api))
+- Backend API running (see [Rate My Bite](https://github.com/your-username/street-food-finder-api))
 
-## 🚀 Getting Started
+## Getting Started
 
-### Installation
+Follow these steps to set up and run the project locally.
 
-1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/your-username/street-food-finder.git
-   cd street-food-finder
-   \`\`\`
+## 1. Clone the Repository
 
-2. Install dependencies:
-   \`\`\`bash
+```bash
+git clone https://github.com/Al-amin07/project-9-client
+```
+
+## 2. Install Dependencies
+
+Navigate to the project directory and install the necessary dependencies:
+
+   ```bash
+   cd project-9-client
    npm install
-   # or
-   yarn install
-   \`\`\`
+   ```
 
-3. Set up environment variables:
-   \`\`\`bash
-   cp .env.example .env.local
-   \`\`\`
-   Then edit the `.env.local` file with your configuration.
+## 3. Set Up Environment Variables
+Create a .env file in the root of the project to store environment variables, such as MongoDB URI or any secret keys. Here’s an example:
+```bash
+NEXT_PUBLIC_API=https://assignment9-flax.vercel.app/api
+JWT_ACCESS_SECRET=sdgsdgsdgjsdd
 
-4. Start the development server:
-   \`\`\`bash
-   npm run dev
-   # or
-   yarn dev
-   \`\`\`
+```
+
+## 4. Run the Project
+- **Development Mode**
+To start the project in development mode with hot reloading:
+```bash
+npm run dev
+```
+- **Production Mode**
+If you prefer to run the project in production mode:
+```bash
+npm run build
+```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Environment Variables
-
-Create a `.env.local` file in the root directory with the following variables:
-
-\`\`\`
-# API Configuration
-NEXT_PUBLIC_API=https://assignment9-flax.vercel.app/api
 
 
 ## 📱 Pages & Features
