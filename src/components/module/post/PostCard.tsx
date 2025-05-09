@@ -25,7 +25,7 @@ export default function PostCard({ spot }: { spot: IPost & { averageRating: numb
                     </Badge>
                 </div>
             </div>
-            <CardHeader className="">
+            <CardHeader className="px-3">
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-xl">{spot.title}</CardTitle>
                     <span className="text-sm whitespace-nowrap font-medium text-gray-500">{spot.price} TK</span>
@@ -35,11 +35,11 @@ export default function PostCard({ spot }: { spot: IPost & { averageRating: numb
                     <span>{spot.location}</span>
                 </div>
             </CardHeader>
-            <CardContent className=" flex-grow">
+            <CardContent className=" flex-grow p-0 px-4">
                 <CardDescription
                     className="line-clamp-2">{spot.description}</CardDescription>
             </CardContent>
-            <CardFooter className="pt-0 pb-3 flex justify-between">
+            <CardFooter className="p-0 pb-4 px-4 flex justify-between">
                 <div className="flex items-center">
                     <div className="flex">
                         {[...Array(spot.averageRating || 5)].map((_, i) => (

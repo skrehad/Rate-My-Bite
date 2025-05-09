@@ -39,21 +39,23 @@ export default function AddVoteForm({ postId }: { postId: string }) {
   }
 
   return (
-    <div className="flex gap-2 mt-6">
-      <Button
-        variant="outline"
-        disabled={loading}
-        onClick={() => handleVote("UPVOTE")}
-      >
-        <ThumbsUp className="w-4 h-4 mr-1" /> Upvote
-      </Button>
-      <Button
-        variant="outline"
-        disabled={loading}
-        onClick={() => handleVote("DOWNVOTE")}
-      >
-        <ThumbsDown className="w-4 h-4 mr-1" /> Downvote
-      </Button>
+    <div className="flex-1 flex justify-center">
+      <div className="flex  gap-2 mt-6">
+        <Button
+          variant="outline"
+          disabled={loading}
+          onClick={() => handleVote("UPVOTE")}
+        >
+          <ThumbsUp className="w-4 h-4 mr-1" /> Upvote
+        </Button>
+        <Button
+          variant="outline"
+          disabled={loading}
+          onClick={() => handleVote("DOWNVOTE")}
+        >
+          <ThumbsDown className="w-4 h-4 mr-1" /> Downvote
+        </Button>
+      </div>
     </div>
   )
 }

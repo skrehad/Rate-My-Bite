@@ -78,6 +78,15 @@ export default function PostsPage() {
     setCurrentPage(1)
   }
 
+  const resetFilters = () => {
+    setSearchTerm("")
+    setCategory("")
+    setLocation("")
+    setMinPrice("")
+    setMaxPrice("")
+    setCurrentPage(1)
+  }
+
   return (
     <div className="container mx-auto p-4">
       {/* Header */}
@@ -89,34 +98,33 @@ export default function PostsPage() {
           </div>
           <Link
             href="/createpost"
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-[#FF6168] rounded-md hover:bg-red-700"
+
           >
-            Create New Post
+            <Button variant={'default'}>Create New Post</Button>
+
           </Link>
         </div>
 
         {/* Search Bar */}
-        <div className="w-full md:w-1/2 flex items-center gap-2">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search posts by title, category, or location..."
-            className="flex-grow p-2 border border-gray-300 rounded-md text-sm"
-          />
-          <button
-            onClick={handleFilter}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-[#FF6168] rounded-md hover:bg-red-700"
-          >
-            Search
-          </button>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="w-full md:w-1/2 flex items-center gap-2">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search posts by title, category, or location..."
+              className="flex-grow p-2 border border-gray-300 rounded-md text-sm"
+            />
+            <Button variant={'default'} onClick={handleFilter}>Search</Button>
+          </div>
+          <Button onClick={resetFilters} variant='outline'>Reset</Button>
         </div>
       </div>
 
       {/* Layout */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Filters */}
-        <aside className="w-full lg:w-1/4 border p-4 rounded-md shadow-sm bg-white">
+        <aside className="w-full dark:text-gray-600  lg:w-1/4 border p-4 rounded-md shadow-sm bg-white">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
 
           <div className="mb-4">
@@ -169,12 +177,8 @@ export default function PostsPage() {
             </div>
           </div>
 
-          <button
-            onClick={handleFilter}
-            className="mt-4 w-full bg-[#FF6168] text-white py-2 rounded hover:bg-red-700 text-sm"
-          >
-            Apply Filters
-          </button>
+
+          <Button onClick={handleFilter} className="w-full" variant={'destructive'}>Apply Filters</Button>
         </aside>
 
         {/* Posts */}
@@ -202,7 +206,6 @@ export default function PostsPage() {
                         className="object-cover transition-transform group-hover:scale-105"
                       />
                       <div className="absolute top-2 right-2 flex gap-2">
-                        {/* <PostStatusBadge status={post?.status as PostStatus} /> */}
                         {post.isPremium && (
                           <Badge variant="default" className=" text-white hover:bg-primary/90">
                             Premium
@@ -210,16 +213,17 @@ export default function PostsPage() {
                         )}
                       </div>
                     </div>
-                    <CardContent className="">
+                    <CardContent className="px-3">
                       <div className="flex items-center justify-between mb-2">
-                        <Badge variant="outline">{post.category?.name}</Badge>
-                        <span className="font-semibold text-muted-foreground text-sm">{post.location}</span>
+                        <Badge variant="outline">{post?.category?.name}</Badge>
+                        <span className="font-semibold text-muted-foreground text-sm">{post?.price} TK</span>
                       </div>
-                      <h2 className="text-xl font-semibold mb-2 line-clamp-1">{post.title}</h2>
-                      <p className="text-muted-foreground text-sm line-clamp-2 mb-1">{post.description}</p>
+                      <h2 className="text-xl font-semibold mb-2 line-clamp-1">{post?.title}</h2>
+                      <p className="text-muted-foreground text-sm line-clamp-2 mb-1">{post?.description}</p>
                     </CardContent>
-                    <CardFooter className=" pt-0 pb-3 flex justify-between items-center">
-                      <Badge variant="secondary">{post.priceRange}</Badge>
+                    <CardFooter className=" pt-0 px-3 pb-4 flex justify-between items-center">
+                      <Badge variant="secondary">{post?.priceRange}</Badge>
+                      <span className="font-semibold text-muted-foreground text-sm">{post?.location?.slice(0, 25)}</span>
                     </CardFooter>
                   </Card>
                 </Link>

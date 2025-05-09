@@ -8,7 +8,7 @@ export default async function AdminUsers({ searchParams }: { searchParams: Promi
     console.log({ data })
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <main className="container mx-auto py-10">
+            <main className="container mx-auto">
                 <h1 className="text-3xl font-bold mb-6">User Management</h1>
                 <UsersTable data={data?.data} meta={data?.meta} />
             </main>

@@ -6,7 +6,7 @@ const CommonLayout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="">
         <Navbar />
-        <div className=" mx-auto  px-5 md:px-0">
+        <div className=" mx-auto min-h-[calc(100vh-80px)]  px-5 md:px-0">
           {children}
         </div>
         <Footer />

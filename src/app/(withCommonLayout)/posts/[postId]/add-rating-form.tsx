@@ -41,28 +41,30 @@ export default function AddRatingForm({ postId }: { postId: string }) {
   }
 
   return (
-    <div className="mt-6">
-      <h3 className="text-lg font-semibold mb-2">Rate this post</h3>
-      <div className="flex items-center gap-1 mb-2">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <button
-            key={star}
-            type="button"
-            onClick={() => setValue(star)}
-            className="text-yellow-500 hover:scale-110 transition-transform"
-          >
-            <Star
-              size={24}
-              fill={value >= star ? "currentColor" : "none"}
-              stroke="currentColor"
-              strokeWidth={1.5}
-            />
-          </button>
-        ))}
+    <div className="flex-1 flex justify-center">
+      <div className="mt-6 ">
+        <h3 className="text-lg font-semibold mb-2">Rate this post</h3>
+        <div className="flex items-center gap-1 mb-2">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <button
+              key={star}
+              type="button"
+              onClick={() => setValue(star)}
+              className="text-yellow-500 hover:scale-110 transition-transform"
+            >
+              <Star
+                size={24}
+                fill={value >= star ? "currentColor" : "none"}
+                stroke="currentColor"
+                strokeWidth={1.5}
+              />
+            </button>
+          ))}
+        </div>
+        <Button onClick={handleSubmit} disabled={value < 1 || loading}>
+          {loading ? "Submitting..." : "Submit Rating"}
+        </Button>
       </div>
-      <Button onClick={handleSubmit} disabled={value < 1 || loading}>
-        {loading ? "Submitting..." : "Submit Rating"}
-      </Button>
     </div>
   )
 }

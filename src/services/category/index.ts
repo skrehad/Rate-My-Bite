@@ -12,3 +12,16 @@ export const getAllCategory = async () => {
     return Error(error);
   }
 };
+export const getAllHomePageCategory = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/category`, {
+      next: {
+        revalidate: 12000,
+      },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
