@@ -11,9 +11,9 @@ export default async function AdminCategoryPage({ searchParams }: { searchParams
     const data = await getAllCategories(query)
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <main className="container mx-auto py-10">
+            <main className="container mx-auto ">
                 <div className='flex justify-between items-center mb-6'>
-                    <h1 className="text-3xl font-bold mb-6">Post Management</h1>
+                    <h1 className="text-3xl font-bold mb-6">Category Management</h1>
                     <CreateCategoryModal />
                 </div>
 

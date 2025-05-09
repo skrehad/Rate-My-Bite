@@ -49,7 +49,7 @@ export default function ForgotPasswordForm() {
     }
 
     return (
-        <div className="flex  items-center justify-center px-4 py-12">
+        <div className="flex min-h-[calc(100vh-80px)]  items-center justify-center  ">
             <Card className="w-full max-w-md">
                 <CardHeader>
                     <CardTitle className="text-2xl">Forgot Password ?</CardTitle>

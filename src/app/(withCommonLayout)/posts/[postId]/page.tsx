@@ -28,8 +28,8 @@ export default async function PostPage(props: any) {
     post.ratings?.reduce((acc: number, r: IRating) => acc + r.value, 0) / post.ratings.length || 0
 
   return (
-    <div className="container py-8">
-      <Card>
+    <div className="container mx-auto py-8">
+      <Card className="py-0">
         <div className="relative h-[300px] sm:h-[400px]">
           <Image
             src={post.image || "/placeholder.svg"}
@@ -51,6 +51,7 @@ export default async function PostPage(props: any) {
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="outline">{post.category?.name}</Badge>
             <Badge variant="secondary">{post.priceRange}</Badge>
+            <Badge variant="default">{post.price} TK</Badge>
           </div>
           <h1 className="text-2xl font-bold">{post.title}</h1>
           <p className="text-muted-foreground">{post.location}</p>
@@ -65,7 +66,7 @@ export default async function PostPage(props: any) {
           <Separator />
 
           {/* Voting & Rating Info */}
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-wrap gap-4 ">
             <div className="flex items-center gap-2 text-sm">
               <ThumbsUp className="w-4 h-4 text-green-600" /> {upvotes} Upvotes
             </div>
@@ -81,7 +82,7 @@ export default async function PostPage(props: any) {
           <Separator />
 
           {/* Add Comment/Rating/Vote Forms */}
-          <div className="flex  justify-between items-center gap-4 mt-4">
+          <div className="flex md:flex-row flex-col-reverse  justify-between items-center gap-4 mt-4">
             <AddCommentForm postId={post.id} />
             <AddVoteForm postId={post.id} />
             <AddRatingForm postId={post.id} />
