@@ -13,7 +13,7 @@ export const registerUser = async (userData: FieldValues) => {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    console.log({ data });
+    // console.log({ data });
     if (data?.success) {
       (await cookies()).set("accessToken", data?.data?.accessToken);
       (await cookies()).set("refreshToken", data?.data?.refreshToken);
@@ -89,7 +89,7 @@ export const getAccessToken = async () => {
 };
 
 export const changePassword = async (userData: FieldValues) => {
-  console.log({ userData });
+  // console.log({ userData });
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API}/auth/change-password`,
