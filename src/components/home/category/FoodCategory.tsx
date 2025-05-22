@@ -4,11 +4,14 @@ import { getAllHomePageCategory } from "@/services/category";
 import { ICategory } from "@/types/category.type";
 
 const FoodCategory = async () => {
-  const { data } = await getAllHomePageCategory()
-  console.log({ data })
+  const { data } = await getAllHomePageCategory();
+  console.log({ data });
   return (
-    <section className="p-4 md:p-8 lg:p-12 rounded-2xl   dark:bg-gray-800">
-      <TextSizer title="Search By Cuisine" desc="Explore restaurants and cafes by your favorite cuisine" />
+    <section className=" rounded-2xl   dark:bg-gray-800">
+      <TextSizer
+        title="Search By Cuisine"
+        desc="Explore restaurants and cafes by your favorite cuisine"
+      />
 
       <div className="grid  grid-cols-2 md:grid-cols-4 gap-6">
         {data?.slice(0, 8)?.map((category: ICategory) => (

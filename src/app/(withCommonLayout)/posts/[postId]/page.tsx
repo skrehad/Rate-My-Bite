@@ -1,34 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // app/posts/[postId]/page.tsx
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import { getSinglePost } from "@/services/posts"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { PostStatusBadge } from "./post-status-badge"
-import { ThumbsUp, ThumbsDown, Star } from "lucide-react"
-import AddCommentForm from "./add-comment-form"
-import AddVoteForm from "./add-vote-form"
-import AddRatingForm from "./add-rating-form"
-import { MessageSquare } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { IVote } from "@/types/vote.type"
-import { IRating } from "@/types/rating.type"
-import { IComment } from "@/types/comment.type"
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { getSinglePost } from "@/services/posts";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { PostStatusBadge } from "./post-status-badge";
+import { ThumbsUp, ThumbsDown, Star } from "lucide-react";
+import AddCommentForm from "./add-comment-form";
+import AddVoteForm from "./add-vote-form";
+import AddRatingForm from "./add-rating-form";
+import { MessageSquare } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { IVote } from "@/types/vote.type";
+import { IRating } from "@/types/rating.type";
+import { IComment } from "@/types/comment.type";
 
 export default async function PostPage(props: any) {
-  const res = await getSinglePost(props?.params.postId)
-  if (!res || res instanceof Error) return notFound()
-  const post = res.data
+  const res = await getSinglePost(props?.params.postId);
+  if (!res || res instanceof Error) return notFound();
+  const post = res.data;
 
-  const upvotes = post.votes?.filter((v: IVote) => v.status === "UPVOTE").length || 0
-  const downvotes = post.votes?.filter((v: IVote) => v.status === "DOWNVOTE").length || 0
+  const upvotes =
+    post.votes?.filter((v: IVote) => v.status === "UPVOTE").length || 0;
+  const downvotes =
+    post.votes?.filter((v: IVote) => v.status === "DOWNVOTE").length || 0;
   const averageRating =
-    post.ratings?.reduce((acc: number, r: IRating) => acc + r.value, 0) / post.ratings.length || 0
+    post.ratings?.reduce((acc: number, r: IRating) => acc + r.value, 0) /
+      post.ratings.length || 0;
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container px-5 lg:px-15 md:px-10 mx-auto py-20">
       <Card className="py-0">
         <div className="relative h-[300px] sm:h-[400px]">
           <Image
@@ -40,7 +48,10 @@ export default async function PostPage(props: any) {
           <div className="absolute top-4 right-4 flex gap-2">
             <PostStatusBadge status={post.status} />
             {post.isPremium && (
-              <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
+              <Badge
+                variant="secondary"
+                className="bg-amber-500 text-white hover:bg-amber-600"
+              >
                 Premium
               </Badge>
             )}
@@ -60,7 +71,9 @@ export default async function PostPage(props: any) {
         <CardContent className="space-y-6">
           <div>
             <h2 className="text-xl font-semibold mb-2">Description</h2>
-            <p className="whitespace-pre-line text-muted-foreground">{post.description}</p>
+            <p className="whitespace-pre-line text-muted-foreground">
+              {post.description}
+            </p>
           </div>
 
           <Separator />
@@ -71,13 +84,14 @@ export default async function PostPage(props: any) {
               <ThumbsUp className="w-4 h-4 text-green-600" /> {upvotes} Upvotes
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <ThumbsDown className="w-4 h-4 text-red-600" /> {downvotes} Downvotes
+              <ThumbsDown className="w-4 h-4 text-red-600" /> {downvotes}{" "}
+              Downvotes
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Star className="w-4 h-4 text-yellow-500" /> {averageRating.toFixed(1)} / 5
+              <Star className="w-4 h-4 text-yellow-500" />{" "}
+              {averageRating.toFixed(1)} / 5
             </div>
           </div>
-
 
           <Separator />
 
@@ -88,10 +102,7 @@ export default async function PostPage(props: any) {
             <AddRatingForm postId={post.id} />
           </div>
 
-
-
           <Separator />
-
 
           {/* Display Comments */}
           {post.comments?.length > 0 && (
@@ -114,27 +125,33 @@ export default async function PostPage(props: any) {
 
                     {/* Comment Body */}
                     <div className="flex-1">
-                      <div className="text-sm text-muted-foreground">{comment.text}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {comment.text}
+                      </div>
                       <p className="text-xs text-gray-500 mt-1">
                         Posted on{" "}
-                        {new Date(comment.createdAt).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
+                        {new Date(comment.createdAt).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          }
+                        )}
                       </p>
-                      {idx !== post.comments.length - 1 && <Separator className="mt-3" />}
+                      {idx !== post.comments.length - 1 && (
+                        <Separator className="mt-3" />
+                      )}
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-
         </CardContent>
 
         <CardFooter />
       </Card>
     </div>
-  )
+  );
 }

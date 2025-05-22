@@ -10,9 +10,9 @@ import HowItWorks from "@/components/home/HowItWorks/HowItWorks";
 import Testimonial from "@/components/home/Testimonials/testimonial";
 export default function Home() {
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 ">
       <Banner />
-      <div className="container  space-y-24 mx-auto">
+      <div className="container lg:px-15 md:px-10 sm:px-5 space-y-24 mx-auto">
         <FoodCategory />
         <FeatureFoodSpot />
         <FoodEvents />
@@ -20,8 +20,9 @@ export default function Home() {
         <Testimonial />
         <HowItWorks />
         <Gallery />
-        <Community />
       </div>
+
+      <Community />
       <Discover />
     </div>
   );

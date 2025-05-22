@@ -2,12 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 export default function Banner() {
-
-
   return (
-
     <div className="w-full h-screen relative inset-0 z-10 pt-28 md:pb-0">
       <div className="absolute min-h-screen inset-0 -z-10">
         <Image
@@ -36,9 +33,9 @@ export default function Banner() {
               Discover Amazing Street Food
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8 text-gray-200">
-              Find, share, and review the best street food spots in your city. Join our community of food enthusiasts!
+              Find, share, and review the best street food spots in your city.
+              Join our community of food enthusiasts!
             </p>
-
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
@@ -49,11 +46,8 @@ export default function Banner() {
               </Button>
             </div>
           </div>
-
-
         </div>
       </div>
-
     </div>
   );
 }

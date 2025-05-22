@@ -18,11 +18,12 @@ const locations = ["Dhaka", "Chattogram", "Sylhet", "Rajshahi"];
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto lg:px-15 md:px-10 sm:px-5 py-12">
         {/* Header */}
         <div className="md:flex md:items-center md:justify-between">
           <h1 className="text-xl font-semibold tracking-tight md:mx-3 xl:text-2xl">
-            Subscribe to our newsletter for <span className="text-primary">tasty updates 🍔</span>
+            Subscribe to our newsletter for{" "}
+            <span className="text-primary">tasty updates 🍔</span>
           </h1>
 
           <div className="mt-6 md:mx-3 md:mt-0">
@@ -89,13 +90,22 @@ export default function Footer() {
           <div>
             <p className="font-semibold">Categories</p>
             <div className="mt-5 space-y-2">
-              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+              <a
+                href="#"
+                className="block text-gray-300 hover:underline hover:text-primary"
+              >
                 Street Food
               </a>
-              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+              <a
+                href="#"
+                className="block text-gray-300 hover:underline hover:text-primary"
+              >
                 Fine Dining
               </a>
-              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+              <a
+                href="#"
+                className="block text-gray-300 hover:underline hover:text-primary"
+              >
                 Cafés & Desserts
               </a>
             </div>
@@ -105,16 +115,37 @@ export default function Footer() {
           <div>
             <p className="font-semibold">Contact Us</p>
             <div className="mt-5 space-y-2">
-              <a href="tel:+8807684734978" className="block text-gray-300 hover:underline hover:text-primary">
+              <a
+                href="tel:+8807684734978"
+                className="block text-gray-300 hover:underline hover:text-primary"
+              >
                 +880 768 473 4978
               </a>
-              <a href="mailto:info@foodreview.com" className="block text-gray-300 hover:underline hover:text-primary">
+              <a
+                href="mailto:info@foodreview.com"
+                className="block text-gray-300 hover:underline hover:text-primary"
+              >
                 info@foodreview.com
               </a>
               <div className="flex items-center space-x-3">
-                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Facebook /></a>
-                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Instagram /></a>
-                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Twitter /></a>
+                <a
+                  href=""
+                  className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"
+                >
+                  <Facebook />
+                </a>
+                <a
+                  href=""
+                  className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"
+                >
+                  <Instagram />
+                </a>
+                <a
+                  href=""
+                  className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"
+                >
+                  <Twitter />
+                </a>
               </div>
             </div>
           </div>
@@ -133,7 +164,9 @@ export default function Footer() {
             />
             <span className=" text-lg font-mono">Rate My Bite</span>
           </div>
-          <p className=" text-sm text-gray-400 sm:mt-0">© 2025 Food Review. All rights reserved.</p>
+          <p className=" text-sm text-gray-400 sm:mt-0">
+            © 2025 Food Review. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

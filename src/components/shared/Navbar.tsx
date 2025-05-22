@@ -31,9 +31,9 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
-      <div className="container mx-auto  px-4 md:px-0 flex justify-between items-center">
+      <div className="container lg:pl-7  md:pl-7 lg:pr-15 md:pr-10 sm:pr-5 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 p-0 ">
+        <Link href="/" className="flex items-left gap-2 p-0 ">
           <Image
             src="/image/logo/logo.png"
             alt="Logo"
@@ -41,7 +41,6 @@ const Navbar = () => {
             height={120}
             className=""
           />
-
         </Link>
 
         {/* Desktop Menu */}
@@ -50,10 +49,11 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-base font-semibold transition-colors ${pathname === item.href
-                ? "text-primary"
-                : "text-gray-800 dark:text-white hover:text-primary"
-                }`}
+              className={`text-base font-semibold transition-colors ${
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-gray-800 dark:text-white hover:text-primary"
+              }`}
             >
               {item.label}
             </Link>
@@ -88,7 +88,13 @@ const Navbar = () => {
                   {user.fullName || "My Account"}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href={user?.role === 'ADMIN' ? "/admin/dashboard" : "/user/dashboard"}>
+                <Link
+                  href={
+                    user?.role === "ADMIN"
+                      ? "/admin/dashboard"
+                      : "/user/dashboard"
+                  }
+                >
                   <DropdownMenuItem className="cursor-pointer">
                     Dashboard
                     <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
@@ -139,10 +145,11 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`block font-semibold text-md ${pathname === item.href
-                ? "text-primary"
-                : "text-gray-800 dark:text-white hover:text-primary"
-                }`}
+              className={`block font-semibold text-md ${
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-gray-800 dark:text-white hover:text-primary"
+              }`}
             >
               {item.label}
             </Link>

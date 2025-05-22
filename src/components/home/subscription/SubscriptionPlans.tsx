@@ -34,7 +34,7 @@ const SubscriptionPlans = () => {
 
   return (
     <section className="py-10 sm:py-14 md:py-16  dark:from-gray-900 dark:to-gray-800">
-      <div className="container px-4 mx-auto">
+      <div className="container  mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,8 +47,11 @@ const SubscriptionPlans = () => {
               <BsStars className="mr-1" /> Unlock Premium Features
             </span>
           </div>
-          <TextSizer title="Choose Your Perfect Plan" desc="Discover exclusive street food spots that only premium members can
-            access. Upgrade to unlock all premium content and hidden gems." />
+          <TextSizer
+            title="Choose Your Perfect Plan"
+            desc="Discover exclusive street food spots that only premium members can
+            access. Upgrade to unlock all premium content and hidden gems."
+          />
         </motion.div>
 
         <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
@@ -59,10 +62,11 @@ const SubscriptionPlans = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               key={plan.id}
-              className={`flex flex-col p-5 sm:p-6 rounded-2xl shadow-xl ${plan.id === "MONTHLY"
-                ? "border-2 border-primary relative bg-gradient-to-b from-white to-primary/5 dark:from-gray-800 dark:to-primary/10 transform scale-105 z-10"
-                : "border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
-                } transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
+              className={`flex flex-col p-5 sm:p-6 rounded-2xl shadow-xl ${
+                plan.id === "MONTHLY"
+                  ? "border-2 border-primary relative bg-gradient-to-b from-white to-primary/5 dark:from-gray-800 dark:to-primary/10 transform scale-105 z-10"
+                  : "border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+              } transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
             >
               {plan.id === "MONTHLY" && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-purple-600 text-white text-xs font-bold py-1 px-4 rounded-full flex items-center shadow-lg">
@@ -94,10 +98,11 @@ const SubscriptionPlans = () => {
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <div
-                        className={`${feature.included
-                          ? "bg-green-100 text-green-600 dark:bg-green-900/40 dark:text-green-400"
-                          : "bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400"
-                          } rounded-full p-1 mr-2 flex-shrink-0`}
+                        className={`${
+                          feature.included
+                            ? "bg-green-100 text-green-600 dark:bg-green-900/40 dark:text-green-400"
+                            : "bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400"
+                        } rounded-full p-1 mr-2 flex-shrink-0`}
                       >
                         {feature.included ? (
                           <FiCheck size={14} />
@@ -106,10 +111,11 @@ const SubscriptionPlans = () => {
                         )}
                       </div>
                       <span
-                        className={`text-xs sm:text-sm ${feature.included
-                          ? "text-gray-800 dark:text-gray-200 font-medium"
-                          : "text-gray-500 dark:text-gray-400"
-                          }`}
+                        className={`text-xs sm:text-sm ${
+                          feature.included
+                            ? "text-gray-800 dark:text-gray-200 font-medium"
+                            : "text-gray-500 dark:text-gray-400"
+                        }`}
                       >
                         {feature.feature}
                       </span>
@@ -120,12 +126,13 @@ const SubscriptionPlans = () => {
               <Button
                 onClick={() => handleSubscribe(plan.id)}
                 variant={plan.id === "FREE" ? "outline" : "default"}
-                className={`w-full cursor-pointer text-sm sm:text-base py-2 rounded-xl font-medium transition-all duration-300 ${plan.id === "MONTHLY"
-                  ? "bg-gradient-to-r from-primary to-purple-600 hover:shadow-lg hover:shadow-primary/20"
-                  : plan.id === "FREE"
+                className={`w-full cursor-pointer text-sm sm:text-base py-2 rounded-xl font-medium transition-all duration-300 ${
+                  plan.id === "MONTHLY"
+                    ? "bg-gradient-to-r from-primary to-purple-600 hover:shadow-lg hover:shadow-primary/20"
+                    : plan.id === "FREE"
                     ? "border-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     : "hover:shadow-md"
-                  }`}
+                }`}
               >
                 {plan.id === "FREE" ? "Current Plan" : "Subscribe Now"}
               </Button>
