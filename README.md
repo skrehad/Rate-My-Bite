@@ -1,6 +1,6 @@
 # Rate My Bite
 
-https://project-9-client.vercel.app/
+https://rate-my-bite.vercel.app
 
 ## 🍔 Overview
 
@@ -58,7 +58,7 @@ Rate My Bite is a Next.js web application where users can discover, post, and re
 
 - Node.js (v16+)
 - npm or yarn
-- Backend API running (see [Rate My Bite](https://github.com/Al-amin07/project-9-server))
+- Backend API running (see [Rate My Bite](https://github.com/skrehad/Rate-My-Bite-Server))
 
 ## Getting Started
 
@@ -67,7 +67,7 @@ Follow these steps to set up and run the project locally.
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Al-amin07/project-9-client
+git clone https://github.com/skrehad/Rate-My-Bite
 ```
 
 ## 2. Install Dependencies
@@ -75,12 +75,12 @@ git clone https://github.com/Al-amin07/project-9-client
 Navigate to the project directory and install the necessary dependencies:
 
    ```bash
-   cd project-9-client
+   cd Rate-My-Bite
    npm install
    ```
 
 ## 3. Set Up Environment Variables
-Create a .env file in the root of the project to store environment variables, such as MongoDB URI or any secret keys. Here’s an example:
+Create a .env file in the project's root to store environment variables, such as MongoDB URI or any secret keys. Here’s an example:
 ```bash
 NEXT_PUBLIC_API=https://assignment9-flax.vercel.app/api
 JWT_ACCESS_SECRET=sdgsdgsdgjsdd
